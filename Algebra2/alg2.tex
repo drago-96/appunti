@@ -1,0 +1,533 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{commath}
+\usepackage{mathtools}
+\usepackage{faktor}
+
+\setlength{\parindent}{0pt}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Teorema}[section]
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposizione}
+\newtheorem*{cor}{Corollario}
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definizione}[section]
+\newtheorem*{exmp}{Esempio}
+\newtheorem{prob}{Problema}[section]
+\newtheorem{es}{Esercizio}[section]
+\newtheorem{sol}{Soluzione}[section]
+\newtheorem*{oss}{Osservazione}
+
+\newenvironment{myproof}[1][\proofname]{%
+  \begin{proof}[#1]$ $\par\nobreak\ignorespaces
+}{%
+  \qedhere
+  \end{proof}
+}
+
+\newcommand{\lcm}{\text{lcm}}
+\newcommand{\ann}{\text{Ann}}
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Zn}[1]{\Z/#1\Z}
+
+\title{Algebra 2}
+\author{Riccardo Zanotto}
+\date{\today}
+
+\makeindex
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Anelli e ideali}
+
+\subsection{Definizioni}
+
+\begin{defn}[Anello]
+    Un insieme $A$ è detto \textit{anello} se è dotato di due operazioni $(A,+,\cdot)$ tali che
+    \begin{itemize}
+        \item $(A,+)$ è un gruppo commutativo, con elemento neutro $0_A$
+        \item $\cdot$ è associativo
+        \item Esiste un elemento $1\in A$ tale che $1\cdot a=a\cdot1=a\forall a\in A$
+        \item $\forall x,y,z\in A$ vale $x\cdot(x+z)=xy+xz$ e $(y+z)\cdot x=yx+zx$
+    \end{itemize}
+    Inoltre se il prodotto è commutativo, $A$ è detto \textit{anello commutativo}
+\end{defn}
+
+\begin{oss}
+    In generale $0\neq1$, altrimenti $A={0}$ è l'anello banale, poiché $a=a\cdot1=a\cdot0=0$
+\end{oss}
+
+\begin{exmp}
+    $ $
+    \begin{itemize}
+        \item $\Z,\Q,\R$ con le operazioni usuali sono anelli commutativi
+        \item Le matrici $n\times n$ sono un anello non commutativo
+    \end{itemize}
+\end{exmp}
+
+\begin{defn}[Unità]
+    Un elemento $a\in A$ si dice \textit{unità} se $\exists b\in A$ tale che $ab=1$.\\
+    Si indica con $A^\ast$ l'insieme delle unità, o elementi invertibili.
+\end{defn}
+
+\begin{defn}[Divisore di $0$]
+    Un elemento $a\in A$ si dice \textit{divisore di $0$} se $\exists b\in A$ tale che $ab=0$.\\
+    Si indica con $\D(A)$ l'insieme dei divisori di $0$.\\
+    Se $D(A)=0$, allora l'anello è detto \textit{dominio}.
+\end{defn}
+
+\begin{defn}[Nilpotente]
+    Un elemento $a\in A$ si dice \textit{nilpotente} se $\exists n\in\N$ tale che $a^n=0$.\\
+    Si indica con $N(A)$ l'insieme degli elementi nilpotenti, che è detto nilradicale.\\
+    Se $N(A)=0$, l'anello $A$ è detto \textit{ridotto}.
+\end{defn}
+
+\begin{exmp}
+    Prendiamo $A=\Zn{n}$ con $n=p_1^{\alpha_1}\cdots p_k^{\alpha_k}$. Allora i nilpotenti sono tutti e soli gli elementi del tipo $p_1^{b_1}\cdots p_k^{b_k}$ cpn $b_i>0$. I divisori di 0 sono gli $m$ tali che $\gcd(m,n)>1$.
+\end{exmp}
+
+\begin{prop}
+    La somma di un nilpotente ed un invertibile è ancora invertibile.
+\end{prop}
+\begin{myproof}
+    Detto $a\in A^\ast$ e $b\in N(A)$, consideriamo $a^{-1}(a+b)=1-x$ e osserviamo che $x$ è ancora nilpotente.\\
+    Detto $n$ l'indice di nilpotenza di $x$, vale $(1-x)(1+x+\dots+x^{n-1})=1-x^n=1$ cioè $1-x$ è invertibile; ma allora anche $a(1-x)=a+b$ è invertibile.
+\end{myproof}
+
+Consideriamo ora dei sottoinsiemi particolari di un anello, che saranno fondamentali nello studio delle proprietà degli anelli, in quanto corrispettivi della nozione di sottogruppo.\\
+
+\begin{defn}[Ideale]
+    Un sottoinsieme $I\subset A$ di un anello è detto \textit{ideale} se è un sottogruppo di $(A,+)$ ed è chiuso rispetto alla moltiplicazione per elementi di $A$, ovvero $x\in A,i\in I\Longrightarrow xi\in I$.
+\end{defn}
+
+\begin{exmp}
+    $ $
+    \begin{itemize}
+        \item In $\Z$ un ideale è formato ad esempio da tutti i multipli di $5$.
+        \item In $\Z[x]$ tutti i polinomi che non hanno termine noto formano un ideale.
+    \end{itemize}
+\end{exmp}
+
+Osserviamo che se $S\subset A$, è facile costruire un ideale $I$ che contenga $S$; in particolare $\displaystyle (S)=\left\{ \sum_{i=1}^k a_i s_i \mid a_i\in A, s_i\in S \right\}$ si dice \textit{ideale generato da $S$}.\\
+Se $S$ è finito, allora $(S)$ è \textit{finitamente generato}.\\
+
+\begin{defn}[Principale]
+    Un ideale $I\subset A$ è detto \textit{principale} se $\exists a\in A$ per cui $I=(a)$.
+\end{defn}
+\begin{defn}[Primo]
+    Un ideale $I\subset A$ è detto \textit{primo} se $ab\in I\Longrightarrow a\in I \lor b\in I$.\\
+    L'insieme di tutti gli ideali primi $Spec(A)$ è detto \textit{spettro} di $A$.
+\end{defn}
+\begin{defn}[Primario]
+    Un ideale $I\subset A$ è detto \textit{primario} se $ab\in I\Longrightarrow a\in I \lor b^n\in I$ per qualche $n\in\N$.
+\end{defn}
+\begin{defn}[Massimale]
+    Un ideale $I\subset A$ è detto \textit{massimale} se $I\neq A$ e non esiste nessun ideale $J\neq A$ tale che $I\subset J$.
+\end{defn}
+
+
+Esempi, esempi, esempi!!!\\
+
+\begin{es}
+    Se ogni ideale di $A$ è primo, allora $A$ è un campo.
+\end{es}
+
+\subsection{Prime proprietà}
+Vediamo ora alcune proprietà degli ideali, che saranno gli oggetti più studiati.\\
+Iniziamo col vedere che questi oggetti esistono realmente.
+
+\begin{prop}
+    Sia $A$ un anello non banale. Allora esiste sempre un ideale massimale $\m\subset A$.
+\end{prop}
+\begin{myproof}
+    Sia $\Sigma=\{ I \mid I\subsetneq A\}$ ordinato con l'inclusione. Osserviamo che $(0)\in\Sigma$.\\
+    Prendiamo una catena $\{I_j\}_{j\in J}$ e consideriamo $I=\bigcup_{j\in J}I_j$; dimostriamo che $I$ è un ideale.\\
+    Infatti se $x,y\in I$ vuol dire che $x\in I_h$ e $y\in I_k$ per qualche indice; supponiamo senza perdita di generalità che $I_h\subset I_k$. Allora $x\in I_k$, perciò $x+y\in I_k\subset I$. La verifica che $ai\in I\forall a\in A,i\in I$ è banale.\\
+    Inoltre $I$ è proprio, poiché $1\not\in I_j\forall j$, per cui $1\not\ni I$. Perciò $I$ è un maggiorante della catena che avevamo considerato.
+    Concludiamo usando il lemma di Zorn su $\Sigma$, perciò esiste un ideale massimale.
+\end{myproof}
+
+\begin{oss}
+    Dato un elemento $a\not\in A^\ast$, si dimostra che esiste un massimale $\m$ con $a\in\m$, prendendo $\Sigma=\{ I \mid I\subsetneq A,a\in I\}$.
+\end{oss}
+
+\begin{prop}
+    Dato un anello $A$, il nilradicale si può esprimere come $\displaystyle N(A)=\bigcap_{P\text{ primi}}P$.
+\end{prop}
+\begin{myproof}
+    \begin{itemize}
+        \item[$\subset$] Dato $a\in N(A)$, allora $a^n=0\in P$ per ogni ideale $P$. Ma se $P$ è primo, $0=a^n=a\cdot a^{n-1}$, per cui o $a\in P$, o $a^{n-1}\in P$. Procedendo così ottengo in ogni caso che $a\in P$.
+        \item[$\supset$] Dato un $a\not\in N(A)$, voglio trovare un $P$ primo per cui $a\not\in P$.\\
+        Sia $\Sigma=\left\{ I \text{ ideale proprio} | a^n\not\in I\forall n\in\N \right\}$ ordinato con l'inclusione.\\
+        Data una catena $\{I_j\}_{j\in J}$, considero $I=\bigcup_{j\in J}I_j$ e vale ovviamente $a^n\not\in I$. Inoltre $\Sigma\neq\emptyset$ poiché essendo $a$ non nilpotente, $(0)\in\Sigma$.\\
+        Per il lemma di Zorn, esiste allora un elemento $P\in\Sigma$ massimale; osserviamo che $P$ è un ideale, e voglio mostrare che è primo.\\
+        Siano $x,y\not\in P$. Allora $(P,x)=P+(x)\supsetneq P$, per cui $(P,x)\not\in\Sigma$, ovvero $a^n\in P+(x)$; analogamente $a^m\in P+(y)$.\\
+        Questo vuol dire che $a^n=kx+p_1,a^m=hy+p_2$, perciò $a^{m+n}=khxy+p_1hy+p_2kx+p_1p_2\in P+(xy)$, per cui $P+(xy)\not\in\Sigma$.\\
+        Ma allora $xy\not\in P$, altrimenti $P+(xy)=P\in\Sigma$.
+    \end{itemize}
+\end{myproof}
+
+Costruiamo ora alcune operazioni tra ideali che risulteranno utili in seguito...
+\begin{itemize}
+    \item Data una famiglia arbitraria di ideali $\{I_j\}_{j\in J}$, allora $\bigcap I_j$ è un ideale.
+    \item Dati due ideali $I_1,I_2$, si definisce la somma $I_1+I_2=(I_1,I_2)=\{i_1+i_2\mid i_1\in I_1, i_2\in I_2\}$, ovvero l'ideale generato da $I_1\cup I_2$.\\
+    In generale $\sum I_j=(\bigcup I_j)$.
+    \item Dati due ideali $I_1,I_2$, si definisce il prodotto $I_1\cdot I_2=$\\$\displaystyle=\left\{ \sum x_j^{(1)}x_j^{(2)} \mid x_j^{(1)}\in I_1, x_j^{(2)}\in I_2 \right\}$
+    \item Dati due ideali $I,J$, si definisce $I:J=\{ a\in A \mid aJ\subset I \}$
+    \item Dato un ideale $I$, si definisce radicale $\sqrt I=\{ a\in A \mid \exists n\in\N a^n\in I \}$
+\end{itemize}
+
+Per quest'ultima operazione non è banale il fatto che si ottenga un altro ideale, ma si può dimostrare nella seguente
+
+\begin{prop}
+    Dato un ideale $I$, il suo radicale $\sqrt I$ è un ideale.
+\end{prop}
+\begin{myproof}
+    Vediamo intanto che se $a\in\sqrt I$, allora $a^n\in I$ per un qualche $n$, per cui $(ka)^n=k^na^n\in I\forall k\in A$, cioè $ka\in\sqrt I$.\\
+    Siano ora $a,b\in I$, cioè $a^n\in I$ e $b^m\in I$ per certi interi. Dimostriamo che $(a+b)^{n+m}\in I$.\\
+    \begin{align*}
+        \displaystyle (a+b)^{m+n} &= \sum_{k=0}^{m+n}\binom{n+m}k a^kb^{m+n-k} \\ &= \sum_{k=0}^n\binom{n+m}k a^kb^{m+n-k} + \sum_{k=n+1}^{m+n}\binom{n+m}k a^kb^{m+n-k}
+    \end{align*}
+    Osserviamo che nella prima sommatoria $m+n-k\ge m$, per cui possiamo raccogliere $b^m$; analogamente nella seconda $k\ge n$, per cui raccogliamo $a^n$. Ma allora abbiamo una combinazione lineare di $a^n$ e $b^m$ che stanno entrambi in $I$, per cui tutta la somma sta in $I$.
+\end{myproof}
+
+Definiamo ora un ideale particolare:
+\begin{defn}[Radicale di Jacobson]
+    $\displaystyle J(A)=\bigcap_{\mathfrak{m}\subset A}\m$
+\end{defn}
+
+\begin{prop}
+    $\displaystyle x\in J(A) \iff \forall y\in A\;\; 1-xy\in A^\ast$
+\end{prop}
+\begin{myproof}
+    \begin{itemize}
+        \item[$\Longleftarrow$] Se $x\not\in J(A)$, allora $\exists\mathfrak{m}$ massimale tale che $x\not\in\mathfrak{m}$, perciò l'ideale $(\mathfrak{m},x)\supset\mathfrak{m}$ conincide con tutto l'anello $A$.\\
+        Allora $A\ni 1=m+xy$ con $m\in\mathfrak{m}$ e $y\in A$, ovvero $1-xy\in\mathfrak{m}$ da cui $1-xy\in A^\ast$, perché altrimenti $\mathfrak{m}=A$.
+        \item[$\Longrightarrow$] Se $\alpha=1-xy\not\in A^\ast$, allora esiste un $\m$ ideale massimale tale che $\alpha\in\m$.\\
+        Ma allora $x\not\in\m,y\not\in\m$, altrimenti si avrebbe $1\in\m$ e perciò $\m=A$. Dunque $x\not\in J(A)\subset\m$.
+    \end{itemize}
+\end{myproof}
+
+\begin{defn}[Anello locale]
+    Dato un anello $A$, se esiste un unico ideale $\m$ massimale, allora $A$ è detto \textit{locale} e di solito si indica con $(A,\m)$
+\end{defn}
+\begin{exmp}
+    L'anello $\Zn{p^n}$ è locale: gli unici ideali propri sono $(p^i)$ con $i=1,..,n-1$ e in particolare l'unico ideale massimale è $(p)$
+\end{exmp}
+
+\begin{defn}
+    Dato un anello $A$ e due ideali $I,J\subset A$, si dice che $I$ e $J$ sono \textit{comassimali} o \textit{coprimi} se $I+J=A$
+\end{defn}
+\begin{prop}
+    Siano $I,J\subset A$ due ideali comassimali, allora $I\cap J = IJ$
+\end{prop}
+\begin{myproof}
+    Osserviamo intanto che l'inclusione $I\cap J\supset IJ$ è vera sempre.\\
+    Dimostriamo allora che se $\alpha\in I\cap J$, allora $\alpha\in IJ$. Infatti essendo $I,J$ comassimali esistono $i\in I,j\in J$ tali che $1=i+j$.\\
+    Ma allora $\alpha=\alpha\cdot1=\alpha\cdot i+\alpha\cdot j$ ed entrambi i termini appartengono all'ideale $IJ$.
+\end{myproof}
+\begin{oss}
+    Il viceversa non è in generale vero: se consideriamo come anello $K[x,y]$ e prendiamo gli ideali $(x),(y)$, vale chiaramente $(x)\cap(y)=(xy)$, ma ad esempio nell'ideale $(x)+(y)$ non troviamo le costanti.
+\end{oss}
+\begin{exmp}
+    Su $\Z$, osserviamo che $(a)+(b)=(\gcd(a,b))$ mentre $(a)\cap(b)=(\lcm(a,b))$. Vediamo poi che se $\gcd(a,b)=1$ allora $\lcm(a,b)=a\cdot b$, che è esattamente la proposizione.
+\end{exmp}
+
+\begin{lemma}[di scansamento]
+    $ $
+    \begin{itemize}
+        \item[a)] Siano $A$ un anello, $P$ un ideale primo, $I_1,\dots,I_n$ ideali. Vale $$\bigcap I_i\subset P\Longrightarrow\exists j\;|\;I_j\subset P$$ Inoltre se $\bigcap I_i=P$ vale anche $I_j=P$.
+        \item[b)] Siano $A$ un anello, $I\subset A$ un ideale, $P_1,\dots,P_n$ ideali primi. Vale $$I\subset\bigcup P_i\Longrightarrow\exists j\;|\; I\subset P_j$$
+    \end{itemize}
+\end{lemma}
+\begin{myproof}
+    \begin{itemize}
+        \item[a)] Dimostriamo che $\forall i\;\; I_i\not\subset P\Longrightarrow\bigcap I_i\not\subset P$.\\
+        L'ipotesi ci fornisce allora per ogni $i$ un elemento $x_i\in I_i$ e $x_i\not\in P$.\\
+        Ma allora $x_1\cdots x_n\in\prod I_i\subset \bigcap I_i$, ma $x_1\cdots x_n\not\in P$ poiché prodotto di elementi che non stanno in un ideale primo.\\
+        Infine se $P=\bigcap I_i$, allora $I_i\supset \bigcap I_i=P$, e in particolare $P\subset I_j$, dove $I_j$ è l'ideale tale che $I_j\subset P$ che abbiamo appena dimostrato esistere, da cui $P=I_j$.
+        \item[b)] Dimostriamo per induzione su $n$ che $\forall i\;\; I\not\subset P_i \Longrightarrow I\not\subset\bigcup P_i$.\\
+        Il caso $n=1$ è banale, dimostriamo il passo induttivo $n-1\rightarrow n$.\\
+        Per ipotesi induttiva vale che $I\not\subset\bigcup_{i\neq k}P_i\;\;\forall k$, ovvero $\exists x_k\in I$ per cui $x_k\not\in\bigcup_{i\neq k}P_i$.\\
+        Osserviamo che se per un qualche $k$, $x_k\not\in P_k$, allora la tesi segue poiché $\bigcup P_i=P_k\cup\bigcup_{i\neq k}P_i$.\\
+        Supponendo per assurdo $x_i\in P_i\;\;\forall i$, consideriamo $\displaystyle\alpha=\sum_{i=1}^n\prod_{j\neq i}x_j=x_2\cdots x_n+x_1x_3\cdots x_n+\dots+x_1\cdots x_{n-1}$.\\
+        Chiaramente $\alpha\in I$; inoltre $P_i\ni\alpha-x_i(\dots)=\prod_{j\neq i}x_j\not\in P_i$ perché prodotto di fattori che non stanno in $P_i$. Assurdo.
+    \end{itemize}
+\end{myproof}
+
+\subsection{Quozienti e omomorfismi}
+Cominciamo ad entrare nel vivo della teoria degli anelli, e vediamo quali sono le relazioni che sussistono tra anelli diversi, e qual è la struttura e l'utilità degli anelli quozienti.
+
+\begin{defn}[Omomorfismo]
+    Dati due anelli $A,B$, una funzione $f:A\to B$ si dice \textit{omomorfismo di anelli} se valgono le seguenti proprietà:
+    \begin{itemize}
+        \item $f(a+b)=f(a)+f(b)$
+        \item $f(ab)=f(a)f(b)$
+        \item $f(1_A)=1_B$
+    \end{itemize}
+\end{defn}
+\begin{oss}
+    Esiste un unico omomorfismo di anelli $f:\Z\to\Z$, ed è l'identità. Infatti $\Z$ è un gruppo ciclico e fissando l'immagine di $1$ si fissa l'omomoerfismo.
+\end{oss}
+
+\begin{defn}
+    Si chiama \textit{nucleo} dell'omomorfismo l'ideale $ker(f)=\{a\in A\mid f(a)=0\}$.\\
+    Si dice \textit{immagine} dell'omomorfismo il sottoanello $Im(f)=\{b\in B\mid \exists a\in A\; f(a)=b \}$
+\end{defn}
+
+Come per i gruppi, possiamo definire una relazione d'equivalenza su $A$:\\
+Fissato un ideale $I$, diciamo che $a\equiv b\pmod I$ se $a-b\in I$.\\
+Le classi di equivalenza sono i laterali, che sono della forma $a+I$; l'insieme dei laterali è detto quoziente e si indica con $A/I$.
+\begin{prop}
+    Il quoziente $A/I$ ha una struttura di anello con le operazioni indotte da $A$:
+    \begin{itemize}
+        \item $(a+I)+(b+I)=(a+b)+I$
+        \item $(a+I)(b+I)=ab+I$
+    \end{itemize}
+\end{prop}
+
+Possiamo allora definire un'importante mappa, la proiezione al quoziente:
+\begin{align*}
+    \Pi:\;&A\to A/I \\ &a\mapsto a+I
+\end{align*}
+In particolare osserviamo che se $J\subset A$ è un ideale di $A$, allora $\Pi(J)=J/I$ è un ideale di $A/I$. Perciò vale la seguente
+\begin{prop}
+    Esiste una corrispondenza biunivoca tra gli ideali di $A/I$ e gli ideali $A\supset J\supset I$. Tale bigezione è data da $\Pi^{-1}(L)=\{b\in A\mid \Pi(b)\in L\}$
+\end{prop}
+Vi sono inoltre i fondamentali teoremi di omomorfismo, analoghi a quelli sui gruppi
+\begin{thm}
+    $ $
+    \begin{itemize}
+        \item[1)] Sia $f:A\to B$ un omomorfismo. Allora $A/ker(f)\cong Im(f)$
+        \item[2)] Data una catena di ideali $I\subset J\subset A$ vale $$ \frac{A/I}{J/I}\cong A/J$$
+    \end{itemize}
+\end{thm}
+\begin{myproof}
+    \begin{itemize}
+        \item[1)] Chiamiamo $I=ker(f)$; sia $\varphi: A/I\to Im(f)$ definita da $\varphi(a+I)=f(a)$. Si osserva banalmente che $\varphi$ è un omomorfismo.\\
+        Supponiamo che $\varphi(a+I)=\varphi(b+I)$, ma allora $f(a)=f(b)$ ovvero $f(a-b)=0$ e $a-b\in I$; quindi $\varphi$ è iniettiva.\\
+        Inoltre è chiaramente surgettiva, perciò è un isomorfismo.
+        \item[2)] Definiamo $f: A/I\to A/J$ come $f([b]_I)=[b]_J$, ed è una buona definizione in quanto se $[b_1]_I=[b_2]_I$ allora $b_1-b_2\in I\subset J$. Vediamo subito che è surgettiva.\\
+        Per il punto 1), basta dimostrare che $ker(f)=J/I$; ma questo si vede subito in quanto $f([b]_I)=0\iff b\in J$, perciò $ker(f)= \{ j+I\mid j\in J\}=J/I$.
+
+    \end{itemize}
+\end{myproof}
+
+Osserviamo ora che ci sono delle ben precise relazioni tra le proprietà dell'ideale $I$ e quelle dell'anello quoziente $A/I$. In particolare vale
+\begin{prop}
+    $ $
+    \begin{itemize}
+        \item l'ideale $I$ è massimale $\iff$ $A/I$ è un campo
+        \item l'ideale $I$ è primo $\iff$ $A/I$ è un dominio
+        \item l'ideale $I$ coincide con $\sqrt I$ $\iff$ $A/I$ è ridotto
+        \item l'ideale $I$ è primario $\iff$ $N(A/I)=D(A/I)$
+    \end{itemize}
+\end{prop}
+
+\begin{thm}[cinese del resto]
+    Sia $A$ un anello e $I_1,\dots,I_n$ ideali a coppie coprimi. Allora vale $\faktor{A}{I_1\times\dots\times I_n} \cong A/I_1 \times\dots\times A/I_n$
+\end{thm}
+\begin{myproof}
+    Consideriamo l'omomorfismo di proiezione $\varphi: A\to A/I_1\times\dots\times A/I_n$ che manda $a$ in $([a]_{I_1},\dots,[a]_{I_n})$. Dimostriamo che è surgettiva.\\
+    Prendiamo $(a_1,\dots,a_n)\in A/I_1 \times\dots\times A/I_n$; poiché gli ideali sono a coppie comassimali, $\forall i,j$ esistono $\alpha_i^{(j)}\in I_i,\alpha_j^{(i)}\in I_j$ tali che $\alpha_i^{(j)}+\alpha_j^{(i)}=1$.\\
+    Costruiamo $L_i=\prod_{j\neq i}a_j^{(i)}$ e poi $a=\sum a_iL_i$.\\
+    Allora vediamo che $\varphi(a)=(a_1,\dots,a_n)$, poiché $L_i\equiv0\pmod{I_j}$ se $j\neq i$, mentre $L_i\equiv\prod(1-\alpha_i^{(j)})\equiv1\pmod{I_i}$.\\
+    Osserviamo che $\ker\varphi=\bigcap I_i$. Dimostriamo che $\bigcap I_i=\prod I_i$; per induzione, basta che $(I_n,\prod_{i\le n-1}I_i)=(1)$.\\
+    Ma allora prendiamo $L_n\in\prod_{i\le n-1}I_i$ e vediamo che vale $L_n\equiv1\pmod{I_n}$.
+\end{myproof}
+\begin{oss}
+    Se come anello consideriamo $\R[x]$ e come ideali quelli generati da polinomi di primo grado $I_i=(x-a_i)$, vediamo che gli $L_i$ sono proprio i polinomi interpolanti di Lagrange.
+\end{oss}
+
+\subsection{Ideali contratti ed estesi}
+Siano $A,B$ due anelli e $f:A\to B$ un omomorfismo. Prendiamo poi $I\subset A$ e $J\subset B$ ideali.\\
+\begin{defn}
+    $ $
+    \begin{itemize}
+        \item L'ideale contratto di $J$ è $J^c=f^{-1}(J)=\{ a\in A\mid f(a)\in J \}$
+        \item L'ideale esteso di $I$ è $I^e=(f(I))=\{ \sum b_if(a_i)\mid a_i\in I \}$ cioè l'ideale generato dall'immagine di $I$
+    \end{itemize}
+\end{defn}
+
+Vale la seguente proprietà
+\begin{prop}
+    $ $
+    \begin{enumerate}
+        \item $J^c$ è un ideale $\forall J\subset B$ ideale.
+        \item se $f$ è surgettiva, allora $f(I)$ è un ideale.
+    \end{enumerate}
+\end{prop}
+\begin{myproof}
+    \begin{enumerate}
+        \item Siano $a,b\in J^c$, allora $f(a),f(b)\in J$; ma allora $J\ni f(a)+f(b)=f(a+b)$ cioè $a+b\in J^c$. Inoltre se $c\in A$, $J\ni f(c)f(a)=f(ca)$ cioè $ca\in J^c$
+        \item Vale banalmente $f(I)\subset (f(I))$; prendiamo ora $b\in I^e$ ovvero $b=\sum b_if(a_i)$. Poiché $f$ è surgettiva, esistono $c_i\in A$ tali che $b_i=f(c_i)\;\forall i$. Allora $b=f\left( \sum c_ia_i \right)\in f(I)$.
+    \end{enumerate}
+\end{myproof}
+
+\begin{es}
+    Valgono le uguaglianze $I^{ece}=I$ e $J^{cec}=J$
+\end{es}
+
+\begin{prop}
+    La contrazione di un ideale primo è primo.
+\end{prop}
+\begin{myproof}
+    Sia $J\subset B$ un ideale primo; supponiamo $ab\in J^c$, ovvero $f(ab)\in J$. Ciò vuol dire $f(a)f(b)\in J$, ed essendo primo abbiamo $f(a)\in J$ oppure $f(b)\in J$, cioè $a\in J^c$ o $b\in J^c$
+\end{myproof}
+
+\subsection{Esercizi svolti}
+\begin{prob}
+    Se $A$ è un anello finito, allora $A=D(A)\cup A^\ast$
+\end{prob}
+
+\begin{prob}
+    Dato un anello $A$ e un ideale $I\subset A$ tale che $\forall x\not\in I\;\;x\in A^\ast$, dimostrare che $A$ è locale e $I$ è il suo massimale.
+\end{prob}
+
+\begin{prob}
+    Dato un anello $A$ in cui ogni ideale primo è principale, allora ogni ideale è principale ($A$ è un PIR).
+\end{prob}
+
+\begin{prob}
+    $D(A)$ è unione di ideali primi; inoltre $D(A)=\bigcup\sqrt{\ann(a)}$
+\end{prob}
+
+\begin{prob}
+    Se $\sqrt I$ è massimale, allora $I$ è primario.
+\end{prob}
+
+
+
+
+\section{Anelli di polinomi}
+
+\subsection{Polinomi in una variabile}
+Sia $A$ un anello e consideriamo l'anello di polinomi $A[x]$.\\
+Prendiamo il morfismo di inclusione $i:A\xhookrightarrow{} A[x]$, siano $I\subset A, J\subset A[x]$ e studiamo $I^e,J^c$. Si vede subito che vale
+\begin{prop}
+    $ $
+    \begin{itemize}
+        \item $J^c=J\cup A$
+        \item $I^e=I[x]$
+    \end{itemize}
+\end{prop}
+
+Vale inoltre la importante
+\begin{prop}
+    Dato $I\subset A$ ideale, $\displaystyle \faktor{A[x]}{I[x]}\cong \left(\faktor{A}{I}\right)[x]$
+\end{prop}
+\begin{myproof}
+    Consideriamo $\displaystyle\varphi: A[x]\to \left(\faktor{A}{I}\right)[x]$ tale che $\displaystyle\varphi\left(\sum a_ix^i\right)=\sum \pi(a_i)x^i$ dove $\pi$ è la proiezione al quoziente.\\
+    È chiaramente surgettiva; inoltre $ker\varphi$ è esattamente $I[x]$, perciò il risultato segue dal primo teorema di omomorfismo.
+\end{myproof}
+\begin{cor}
+    Se $I\subset A$ è primo, allora $I^e=I[x]$ è primo in $A[x]$
+\end{cor}
+Infatti, se $A/I$ è dominio, anche $\left(\faktor{A}{I}\right)[x]$ è dominio; ma questo è esattamente $\faktor{A[x]}{I[x]}$, perciò $I[x]$ è primo.\\
+\\
+Detto $R=A[x]$ con $A$ anello, cerchiamo di identificare $N(R),D(R)$ e $R^\ast$.\\
+\begin{prop}
+    Sia $f=\sum a_ix^i\in R$. Allora
+    \begin{enumerate}
+        \item $f\in R^\ast \iff a_0\in A^\ast$ e $a_1,\dots,a_n\in N(A)$
+        \item $f\in N(R)\iff a_i\in N(A)\;\forall i$
+        \item $f\in D(R)\iff \exists a\in A$ tale che $af=0$
+    \end{enumerate}
+\end{prop}
+\begin{myproof}
+    \begin{itemize}
+        \item[2, $\Leftarrow$] Detti $m_i$ gli indici di nilpotenza di $a_i$, si vede facilmente che $f^{m_1+\dots+m_n+1}=0$
+        \item[1, $\Leftarrow$] Usando la freccia appena dimostrata di 2, sappiamo che $g(x)=a_1x+\dots+a_nx^n\in N(R)$; ma allora $f=a_0+g$ è somma di un invertibile e un nilpotente, quindi è ancora invertibile.
+        \item[1, $\Rightarrow$] Sia $g=\sum b_ix^i$ di grado $m$ tale che $fg=1$; guardando il termine noto sappiamo $a_0b_0=1$ perciò $a_0$ e $b_0$ sono invertibili.\\
+        Considerando poi i termini di grado maggiore abbiamo $0=a_nb_m$ e $0=a_nb_{m-1}+a_{n-1}b_m$, da cui moltiplicando la seconda per $a_n$ otteniamo $a_n^2b_{m-1}=0$.
+        Continuando così ricaviamo $a_n^{r+1}b_{m-r}=0$; se prendiamo $r=m$ abbiamo $a_n^{m+1}b_0=0$ ed essendo $b_0$ invertibile, abbiamo $a_n$ nilpotente.\\
+        Riapplichiamo ora questo ragionamento a $f-a_nx^n$ che è ancora invertibile.
+        \item[2, $\Rightarrow$] Se $f$ è nilpotente, anche $xf\in N(R)$; ma allora $1+xf\in R^\ast$ e per la 1 si deve avere $a_0,\dots,a_n\in N(A)$.
+    \end{itemize}
+\end{myproof}
+
+\subsection{Ideali monomiali}
+Prendiamo ora un campo $k$ e consideriamo l'anello $A=k[x_1,\dots,x_n]$.\\
+Diamo una notazione per rendere le scritture più compatte: chiamiamo $X=(x_1,\dots,x_n)$ e se $\alpha=(a_1,\dots,a_n)$ allora $X^\alpha$ indica il monomio $x_1^{a_1}\cdots x_n^{a_n}$.\\
+In generale un $f\in k[X]$ si scrive come $f=\sum c_\alpha X^\alpha$ con $c_\alpha\in k$, e la somma è finita.\\
+\begin{defn}
+    Un ideale $I\subset A$ è detto \emph{monomiale} se $\exists E\in\N^n$ tale che $I=(X^\alpha,\alpha\in E)$
+\end{defn}
+\begin{prop}
+    Dato un ideale $I$ monomiale, $f=\sum c_\beta X^\beta\in I$ se e solo se $X^\beta\in I\;\forall\beta$
+\end{prop}
+\begin{myproof}
+    Una freccia è ovvia. Se invece $f\in I$, allora $f=\sum_{\alpha\in E}P_\alpha(X)X^\alpha$ con $P_\alpha(X)=\sum d_{\gamma,\alpha}X^\gamma$ con i $d\in k$. Quindi $\sum c_\beta X^\beta=f=\sum d_{\gamma,\alpha}X^{\alpha+\gamma}$, perciò ogni $X^\beta$ è della forma $X^{\alpha+\gamma}$ ovvero $X^\beta\in I$
+\end{myproof}
+Osserviamo che agli ideali monomiali corrispondono in maniera ovvia certi sottoinsiemi di $\N^n$ grazie alla mappa $X^\alpha\mapsto(a_1,\dots,a_n)$.
+\begin{defn}
+    Un sottoinsieme non vuoto $E\subset\N^n$ si dice $\mathcal E$-sottoinsieme se $\forall\alpha\in E,\forall\beta\in\N^n$ anche $\alpha+\beta$ sta in $E$.\\
+    $F\subset E$ si dice \emph{frontiera} di $E$ se $\forall\alpha\in E\;\;\exists\gamma\in F,\beta\in\N^n$ tali che $\alpha=\gamma+\beta$
+\end{defn}
+\begin{lemma}[Dickson]
+    Ogni $\mathcal E$-sottoinsieme $E$ ha una frontiera finita.
+\end{lemma}
+\begin{myproof}
+    Facciamo una induzione su $n$.\\
+    Se $n=1$, allora $E\subset\N$; ma poiché $\N$ è ben ordinato, la frontiera è semplicemente $\min(E)$.\\
+    Passo induttivo $n\Rightarrow n+1$: $E\subset\N^{n+1}$.\\
+    Consideriamo la proiezione $\Pi:\N^{n+1}\to\N^n$ che ignora l'ultima coordinata. Allora $\Pi(E)$ è ancora un $\mathcal E$-sottoinsieme: infatti $\Pi(\alpha)+\gamma=\Pi(\alpha+(\gamma,0))$.\\
+    Per ipotesi induttiva $\Pi(E)$ ha una frontiera finita $\hat F=\{ \hat\gamma_1,\dots,\hat\gamma_k \}$. Siano $\gamma_i\in E$ tali che $\Pi(\gamma_i)=\hat\gamma_i$, e $\tilde F=\{ \gamma_i \}$.\\
+    Prendiamo $\bar a$ il massimo delle componenti $n+1$-esime dei $\gamma_i$, e per ogni $a<\bar a$ poniamo $E_a=E\cap\left( \N^n\times\{a\} \right)$.\\
+    Si vede che $\Pi(E_a)$ è ancora un $\mathcal E$-sottoinsieme di $\N^n$ e quindi ha frontiera finita $\hat F_a=\{ \gamma_{a,1},\dots,\gamma_{a,k_a} \}$; rimontiamo questo insieme in $E$: $F_a=\{ (\gamma_{a,i},a) \mid i=1,\dots,k_a \}$.\\
+    Allora la frontiera di $E$ è $F=\tilde F\cup\left( \bigcup_{a<\bar a}F_a \right)$.\\
+    Sia infatti $\alpha=(a_1,\dots,a_n,a_{n+1})\in E$; se $a_{n+1}\ge\bar a$, allora esiste un $\beta\in\tilde F$ tale che $\alpha-\beta\in\N^{n+1}$; se $a_{n+1}<\bar a$, allora $\alpha\in E_{a_{n+1}}$ per cui $\exists\gamma\in F_{a_{n+1}}$ per cui $\alpha-\gamma\in\N^{n+1}$.
+\end{myproof}
+\begin{cor}
+    Ogni ideale monomiale è finitamente generato
+\end{cor}
+
+\begin{prop}
+    Dato un $\mathcal E$-sottoinsieme $E\subset\N^n$, esiste un'unica frontiera di cardinalità minima.
+\end{prop}
+
+Operazioni, caratterizazione...
+
+\subsection{Riduzione di polinomi}
+Ordinamento\\
+Riduzione\\
+Alg divisione\\
+
+\subsection{Basi di Gr\"obner}
+Caratterizzazione\\
+Alg Buchberger\\
+Eliminazione\\
+0-dimensionale\\
+
+\subsection{Risoluzione dei sistemi di equazioni polinomiali}
+Varietà affine\\
+Risultante\\
+Estensione\\
+Nullstellensatz\\
+
+
+
+\section{Moduli}
+
+
+
+
+
+
+
+
+\end{document}
