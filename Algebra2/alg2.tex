@@ -7,6 +7,8 @@
 \usepackage{commath}
 \usepackage{mathtools}
 \usepackage{faktor}
+\usepackage[]{algorithm2e}
+\usepackage{hyperref}
 
 \setlength{\parindent}{0pt}
 
@@ -31,8 +33,10 @@
   \end{proof}
 }
 
-\newcommand{\lcm}{\text{lcm}}
-\newcommand{\ann}{\text{Ann}}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\ann}{Ann}
+\DeclareMathOperator{\lt}{lt}
+\DeclareMathOperator{\st}{\; |\;}
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -291,9 +295,9 @@ Cominciamo ad entrare nel vivo della teoria degli anelli, e vediamo quali sono l
 
 Come per i gruppi, possiamo definire una relazione d'equivalenza su $A$:\\
 Fissato un ideale $I$, diciamo che $a\equiv b\pmod I$ se $a-b\in I$.\\
-Le classi di equivalenza sono i laterali, che sono della forma $a+I$; l'insieme dei laterali è detto quoziente e si indica con $A/I$.
+Le classi di equivalenza sono i laterali, che sono della forma $a+I$; l'insieme dei laterali è detto quoziente e si indica con $\faktor{A}{I}$.
 \begin{prop}
-    Il quoziente $A/I$ ha una struttura di anello con le operazioni indotte da $A$:
+    Il quoziente $\faktor{A}{I}$ ha una struttura di anello con le operazioni indotte da $A$:
     \begin{itemize}
         \item $(a+I)+(b+I)=(a+b)+I$
         \item $(a+I)(b+I)=ab+I$
@@ -302,39 +306,39 @@ Le classi di equivalenza sono i laterali, che sono della forma $a+I$; l'insieme 
 
 Possiamo allora definire un'importante mappa, la proiezione al quoziente:
 \begin{align*}
-    \Pi:\;&A\to A/I \\ &a\mapsto a+I
+    \Pi:\;&A\to \faktor{A}{I} \\ &a\mapsto a+I
 \end{align*}
-In particolare osserviamo che se $J\subset A$ è un ideale di $A$, allora $\Pi(J)=J/I$ è un ideale di $A/I$. Perciò vale la seguente
+In particolare osserviamo che se $J\subset A$ è un ideale di $A$, allora $\Pi(J)=\faktor{J}{I}$ è un ideale di $\faktor{A}{I}$. Perciò vale la seguente
 \begin{prop}
-    Esiste una corrispondenza biunivoca tra gli ideali di $A/I$ e gli ideali $A\supset J\supset I$. Tale bigezione è data da $\Pi^{-1}(L)=\{b\in A\mid \Pi(b)\in L\}$
+    Esiste una corrispondenza biunivoca tra gli ideali di $\faktor{A}{I}$ e gli ideali $A\supset J\supset I$. Tale bigezione è data da $\Pi^{-1}(L)=\{b\in A\mid \Pi(b)\in L\}$
 \end{prop}
 Vi sono inoltre i fondamentali teoremi di omomorfismo, analoghi a quelli sui gruppi
 \begin{thm}
     $ $
     \begin{itemize}
         \item[1)] Sia $f:A\to B$ un omomorfismo. Allora $A/ker(f)\cong Im(f)$
-        \item[2)] Data una catena di ideali $I\subset J\subset A$ vale $$ \frac{A/I}{J/I}\cong A/J$$
+        \item[2)] Data una catena di ideali $I\subset J\subset A$ vale $$ \faktor{\faktor{A}{I}}{\faktor{J}{I}}\cong \faktor A J$$
     \end{itemize}
 \end{thm}
 \begin{myproof}
     \begin{itemize}
-        \item[1)] Chiamiamo $I=ker(f)$; sia $\varphi: A/I\to Im(f)$ definita da $\varphi(a+I)=f(a)$. Si osserva banalmente che $\varphi$ è un omomorfismo.\\
+        \item[1)] Chiamiamo $I=ker(f)$; sia $\varphi: \faktor{A}{I}\to Im(f)$ definita da $\varphi(a+I)=f(a)$. Si osserva banalmente che $\varphi$ è un omomorfismo.\\
         Supponiamo che $\varphi(a+I)=\varphi(b+I)$, ma allora $f(a)=f(b)$ ovvero $f(a-b)=0$ e $a-b\in I$; quindi $\varphi$ è iniettiva.\\
         Inoltre è chiaramente surgettiva, perciò è un isomorfismo.
-        \item[2)] Definiamo $f: A/I\to A/J$ come $f([b]_I)=[b]_J$, ed è una buona definizione in quanto se $[b_1]_I=[b_2]_I$ allora $b_1-b_2\in I\subset J$. Vediamo subito che è surgettiva.\\
-        Per il punto 1), basta dimostrare che $ker(f)=J/I$; ma questo si vede subito in quanto $f([b]_I)=0\iff b\in J$, perciò $ker(f)= \{ j+I\mid j\in J\}=J/I$.
+        \item[2)] Definiamo $f: \faktor{A}{I}\to A/J$ come $f([b]_I)=[b]_J$, ed è una buona definizione in quanto se $[b_1]_I=[b_2]_I$ allora $b_1-b_2\in I\subset J$. Vediamo subito che è surgettiva.\\
+        Per il punto 1), basta dimostrare che $ker(f)=\faktor{J}{I}$; ma questo si vede subito in quanto $f([b]_I)=0\iff b\in J$, perciò $ker(f)= \{ j+I\mid j\in J\}=\faktor{J}{I}$.
 
     \end{itemize}
 \end{myproof}
 
-Osserviamo ora che ci sono delle ben precise relazioni tra le proprietà dell'ideale $I$ e quelle dell'anello quoziente $A/I$. In particolare vale
+Osserviamo ora che ci sono delle ben precise relazioni tra le proprietà dell'ideale $I$ e quelle dell'anello quoziente $\faktor{A}{I}$. In particolare vale
 \begin{prop}
     $ $
     \begin{itemize}
-        \item l'ideale $I$ è massimale $\iff$ $A/I$ è un campo
-        \item l'ideale $I$ è primo $\iff$ $A/I$ è un dominio
-        \item l'ideale $I$ coincide con $\sqrt I$ $\iff$ $A/I$ è ridotto
-        \item l'ideale $I$ è primario $\iff$ $N(A/I)=D(A/I)$
+        \item l'ideale $I$ è massimale $\iff$ $\faktor{A}{I}$ è un campo
+        \item l'ideale $I$ è primo $\iff$ $\faktor{A}{I}$ è un dominio
+        \item l'ideale $I$ coincide con $\sqrt I$ $\iff$ $\faktor{A}{I}$ è ridotto
+        \item l'ideale $I$ è primario $\iff$ $N(\faktor{A}{I})=D(\faktor{A}{I})$
     \end{itemize}
 \end{prop}
 
@@ -437,7 +441,7 @@ Vale inoltre la importante
 \begin{cor}
     Se $I\subset A$ è primo, allora $I^e=I[x]$ è primo in $A[x]$
 \end{cor}
-Infatti, se $A/I$ è dominio, anche $\left(\faktor{A}{I}\right)[x]$ è dominio; ma questo è esattamente $\faktor{A[x]}{I[x]}$, perciò $I[x]$ è primo.\\
+Infatti, se $\faktor{A}{I}$ è dominio, anche $\left(\faktor{A}{I}\right)[x]$ è dominio; ma questo è esattamente $\faktor{A[x]}{I[x]}$, perciò $I[x]$ è primo.\\
 \\
 Detto $R=A[x]$ con $A$ anello, cerchiamo di identificare $N(R),D(R)$ e $R^\ast$.\\
 \begin{prop}
@@ -499,13 +503,94 @@ Osserviamo che agli ideali monomiali corrispondono in maniera ovvia certi sottoi
 \begin{prop}
     Dato un $\mathcal E$-sottoinsieme $E\subset\N^n$, esiste un'unica frontiera di cardinalità minima.
 \end{prop}
+\begin{myproof}
+    Siano $F=\{ a_1,\dots,a_k \}$ e $G=\{ b_1,\dots,b_k \}$ due frontiere minimali di $E$; allora $E=\bigcup(a_i+\N^n)=\bigcup(b_i+\N^n)$.\\
+    In particolare per ogni $i$ esiste un $j=\eta(i)$ tale che $a_i\in b_j+\N^n$. Se $\eta$ non fosse surgettiva, allora $G$ non sarebbe minimale. Quindi $\eta:\{1,\dots,k\}\to\{1,\dots,k\}$ è una permutazione.\\
+    Analogamente esiste una permutazione $\epsilon$ tale che $b_i\in a_{\epsilon(i)}+\N^n$. Ma allora $a_i+\N^n\subset b_{\eta(i)}+\N^n\subset a_{\epsilon(\eta(i))}+\N^n$; poiché $F$ è frontiera minimale, deve essere $\epsilon\circ\eta=\text{id}$ e allora $a_i=b_{\eta(i)}$, cioè $F$ e $G$ sono lo stesso insieme.
+\end{myproof}
 
-Operazioni, caratterizazione...
+Vediamo ora alcune operazioni tra ideali monomiali. Siano $I=(m_1,\dots,m_k)$ e $J=(n_1,\dots,n_h)$; allora
+\begin{itemize}
+    \item $I+J=(m_1,\dots,m_k,n_1,\dots,n_h)$
+    \item $I\cap J=\left( \lcm(m_i,n_j) \right)$
+    \item $I:m=\left( \frac{m_i}{\gcd(m_i,m)} \right)$
+\end{itemize}
+
+Ricordiamo inoltre il seguente ed utile lemma:
+\begin{lemma}
+    Se $I$ è un ideale monomiale, $m$ e $n$ due monomi coprimi, allora $(I,mn)=(I,m)\cap(I,n)$
+\end{lemma}
+\begin{myproof}
+    L'inclusione $(I,mn)\subset(I,m)\cap(I,n)$ è banale. Se ora $v\in (I,m)\cap(I,n)$ un monomio, o $v\in I$ (e allora il lemma è vero), oppure $v\not\in I$ e perciò $m\mid v$ e $n\mid v$; essendo $(m,n)=1$, vale $mn\mid v$.
+\end{myproof}
+
+Infine enunciamo alcune caratterizzazioni di ideali monomiali:
+\begin{prop}
+    Sia $I$ un ideale monomiale. Allora
+    \begin{itemize}
+        \item $I$ è primo $\iff I=(x_{i_1},\dots,x_{i_k})$, ovvero è generato da variabili
+        \item $I$ è radicale $\iff$ $I$ è generato da prodotti di variabili squarefree
+        \item $I$ è primario $\iff I=(x_{i_1}^{k_1},\dots,x_{i_s}^{k_s},m_1,\dots,m_t)$ con $m_i\in k[x_{i_1},\dots,x_{i_s}]$
+        \item $I$ è irriducibile $\iff I=(x_{i_1}^{k_1},\dots,x_{i_s}^{k_s})$
+    \end{itemize}
+\end{prop}
+
 
 \subsection{Riduzione di polinomi}
-Ordinamento\\
-Riduzione\\
-Alg divisione\\
+Cerchiamo ora di trovare un modo di fare la divisione di polinomi anche in più variabili, generalizzando il procedimento in una variabile: se dobbiamo dividere $f(x)$ per $g(x)$, dividiamo intanto il termine di grado massimo di $f(x)$ per il termine di grado massimo di $g(x)$.\\
+Il primo problema è dunque decidere qual è il termine di grado massimo di un polinomio in più variabili, e questo si può fare in diversi modi; partiamo dunque dalla seguente definizione.\\
+\begin{defn}
+    Una relazione d'ordine $<$ su $\N^n$ è detto \emph{ordinamento monomiale} se:
+    \begin{itemize}
+        \item $<$ è totale
+        \item $<$ è un buon ordinamento, ovvero se ogni sottoinsieme non vuoto ha minimo
+        \item $<$ rispetta la somma, ovvero se $\alpha<\beta$ anche $\alpha+\gamma<\beta+\gamma$ per ogni $\gamma\in\N^n$
+    \end{itemize}
+\end{defn}
+
+Vi sono diversi ordinamenti monomiali possibili, i più usati sono i seguenti:
+\begin{itemize}
+    \item $\mathtt{lex}$: $\alpha<_{L}\beta\iff$ la prima coordinata non nulla di sinistra di $\beta-\alpha$ è positiva.
+    \item $\mathtt{deg-lex}$: $\alpha<_{DL}\beta\iff|\alpha|<|\beta|$, oppure $|\alpha|=|\beta|$ e $\alpha<_L\beta$.
+    \item $\mathtt{deg-rev-lex}$: $\alpha<_{DRL}\beta\iff|\alpha|<|\beta|$ oppure $|\alpha|=|\beta|$ e la prima cooordinata non nulla da destra di $\beta-\alpha$ è negativa.
+\end{itemize}
+
+Fissato ora un ordinamento monomiale $<$, possiamo parlare di multigrado e termine di testa: dato un polinomio $f=\sum c_\alpha X^\alpha$, posso considerare
+\begin{itemize}
+    \item $Deg_{<}(f)=\max\{ \alpha\in\N^n\st c_\alpha\neq0 \}$ il multigrado
+    \item $\lt(f)=c_\delta X^\delta$ dove $\delta=Deg_{<}(f)$ è il termine di testa, o ``leading term''
+\end{itemize}
+
+Siamo ora pronti a fare la divisione:
+\begin{defn}
+    Dati $f,g,h\in A=k[x_1,\dots,x_n]$ diciamo che $f=\sum t_\alpha$ \emph{riduce} ad $h$ modulo $g$, e scriviamo $f\xrightarrow{g}h$ se $\exists\alpha$ per cui $\lt(g)\mid t_\alpha$ e $h=f-\dfrac{t_\alpha}{\lt(g)}\cdot g$
+\end{defn}
+\begin{exmp}
+    Conti...
+\end{exmp}
+Quello che ci interessa davvero però è ridurre modulo molti polinomi, perciò introduciamo la seguente notazione
+\begin{defn}
+    Dati $f,f_1,\dots,f_s\in A$ diciamo che $f$ riduce ad $h$ modulo $F=\{ f_1,\dots,f_s \}$ e scriviamo $f\xrightarrow{F}_\ast h$ se esistono $i_1,\dots,i_k$ e polinomi $h_1,\dots,h_{k-1}$ tali che $f\xrightarrow{f_{i_1}}h_1\xrightarrow{f_{i_2}}\dots\xrightarrow{f_{i_k}}h$\\
+    Diciamo inoltre che $h$ è \emph{ridotto} rispetto ad $F$ se non posso fare altre riduzioni, ovvero o $h=0$ oppure per ogni termine $t$ di $h$ vale che $\lt(f_i)\nmid t$
+\end{defn}
+Ispirandoci al processo di riduzione, possiamo definire un algoritmo di divisione nella maniera seguente
+
+\begin{algorithm}[H]
+    \KwData{$f,f_1,\dots,f_s;\; <$}
+    \KwResult{$f=\sum u_if_i+r$, con $r$ ridotto modulo $\{f_1,\dots,f_s\}$ e $Def_<(f)\ge\max(Deg_<(r),Deg_<(u_if_i))\;\forall i$}
+    $u_i=0,r=0,h=f$\;
+    \While{$h\neq0$}{
+        \eIf{$\exists i$ tale che $\lt(f_i)\mid\lt(h)$}{
+        scegli $j$ il minimo indice per cui vale la divisibilità\;
+        $u_{j}=u_{j}+\dfrac{\lt(h)}{\lt(f_{j})}$\;
+        $h=h-\dfrac{\lt(h)}{\lt(f_{j})}\cdot f_{j}$\;
+        }{
+        $r=r+\lt(h)$\;
+        $h=h-\lt(h)$\;
+        }
+    }
+    \caption{Algoritmo di divisione}
+\end{algorithm}
 
 \subsection{Basi di Gr\"obner}
 Caratterizzazione\\
