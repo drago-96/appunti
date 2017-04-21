@@ -36,7 +36,12 @@
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\ann}{Ann}
 \DeclareMathOperator{\lt}{lt}
+\DeclareMathOperator{\Lt}{Lt}
+\DeclareMathOperator{\Deg}{Deg}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\Ris}{Ris}
 \DeclareMathOperator{\st}{\; |\;}
+\DeclareMathOperator{\et}{\;\wedge\;}
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -557,8 +562,8 @@ Vi sono diversi ordinamenti monomiali possibili, i più usati sono i seguenti:
 
 Fissato ora un ordinamento monomiale $<$, possiamo parlare di multigrado e termine di testa: dato un polinomio $f=\sum c_\alpha X^\alpha$, posso considerare
 \begin{itemize}
-    \item $Deg_{<}(f)=\max\{ \alpha\in\N^n\st c_\alpha\neq0 \}$ il multigrado
-    \item $\lt(f)=c_\delta X^\delta$ dove $\delta=Deg_{<}(f)$ è il termine di testa, o ``leading term''
+    \item $\Deg_{<}(f)=\max\{ \alpha\in\N^n\st c_\alpha\neq0 \}$ il multigrado
+    \item $\lt(f)=c_\delta X^\delta$ dove $\delta=\Deg_{<}(f)$ è il termine di testa, o ``leading term''
 \end{itemize}
 
 Siamo ora pronti a fare la divisione:
@@ -577,7 +582,7 @@ Ispirandoci al processo di riduzione, possiamo definire un algoritmo di division
 
 \begin{algorithm}[H]
     \KwData{$f,f_1,\dots,f_s;\; <$}
-    \KwResult{$f=\sum u_if_i+r$, con $r$ ridotto modulo $\{f_1,\dots,f_s\}$ e $Def_<(f)\ge\max(Deg_<(r),Deg_<(u_if_i))\;\forall i$}
+    \KwResult{$f=\sum u_if_i+r$, con $r$ ridotto modulo $\{f_1,\dots,f_s\}$ e $\Deg_<(f)\ge\max(\Deg_<(r),\Deg_<(u_if_i))\;\forall i$}
     $u_i=0,r=0,h=f$\;
     \While{$h\neq0$}{
         \eIf{$\exists i$ tale che $\lt(f_i)\mid\lt(h)$}{
@@ -592,17 +597,204 @@ Ispirandoci al processo di riduzione, possiamo definire un algoritmo di division
     \caption{Algoritmo di divisione}
 \end{algorithm}
 
+È facile vedere che quest'algoritmo termina, poiché $\Deg(h)$ diminuisce ad ogni passaggio.\\
+Inoltre osserviamo che se $f\xrightarrow{F}_\ast 0$, allora $f\in(f_1,\dots,f_s)$.\\
+Esempi...
+
 \subsection{Basi di Gr\"obner}
-Caratterizzazione\\
-Alg Buchberger\\
-Eliminazione\\
-0-dimensionale\\
+Introduciamo ora un oggetto molto importante nello studio degli ideali di polinomi.
+\begin{defn}
+    Dato un ideale $I\subset k[x]=A$ e un ordinamento monomiale $<$, definiamo $\Lt(I)=(\lt(f)\st f\in I)$ l'ideale dei leading term di $I$.\\
+    L'insieme $G=\{ g_1,\dots,g_k \}$ è detta \emph{base di Gr\"obner} dell'ideale $I$ se vale $\Lt(G)=(\lt(g_1),\dots,\lt(g_k))=\Lt(I)$
+\end{defn}
+\begin{oss}
+    Una base di Gr\"obner esiste sempre; infatti $\Lt(I)$ è un ideale monomiale, perciò è generato da $\hat g_1,\dots,\hat g_k$.\\
+    Allora basta rimontare questi monomi su $I$, ovvero prendere dei polinomi per cui $\lt(g_i)=\hat g_i$, e poi $G=\{ g_1,\dots,g_k \}$ è una base di Gr\"obner.
+\end{oss}
+Vediamo ora una caratterizzazione importante delle basi di Gr\"obner, che avrà molti corollari utili.
+
+\begin{thm}
+    Sia $I\subset k[x_1,\dots,x_n]$ un ideale e $G=\{g_1,\dots,g_k\}\subset I$; allora sono fatti equivalenti:
+    \begin{enumerate}
+        \item $G$ è una base di Gr\"obner di $I$
+        \item $f\in I\iff f\xrightarrow{G}_\ast 0$
+        \item $f\in I\iff f=\sum h_ig_i$ con $\Deg f\ge \Deg(h_ig_i)$
+    \end{enumerate}
+\end{thm}
+\begin{myproof}
+    \begin{itemize}
+        \item[$1\Rightarrow2$] Facciamo l'algoritmo di divisione $f\xrightarrow{G}_\ast r$.\\
+        Se $r=0$, allora $f=\sum h_ig_i$, ovvero $f\in I$.\\
+        Sia poi $f\in I$, ma allora anche $r=f-\sum h_ig_i\in I$. Se $r\neq0$, si avrebbe $\lt(r)\in\Lt(I)=\Lt(G)$; tuttavia $r$ è ridotto, ovvero nessuno dei suoi monomi sta in $\Lt(G)$, tantomeno il suo termine di testa; perciò abbiamo $r=0$.
+        \item[$3\Rightarrow1$] Dimostriamo che $\Lt(I)\subset (\lt(g_1),\dots,\lt(g_k))$, poiché l'altra inclusione vale sempre.\\
+        Sia $f\in I$, allora $f=\sum h_ig_i$ con $\Deg f\ge \Deg(h_ig_i)$; dato che vale anche $\Deg(f)\le\max(\Deg(h_ig_i))$, esisterà un $j$ per cui $\Deg(f)=\Deg(h_jg_j)$. Ma allora $\lt(g_j)\mid\lt(h_jg_j)\mid\lt(f)$, perciò $\lt(f)\in\Lt(G)$.\\
+    \end{itemize}
+\end{myproof}
+
+Ecco alcuni corollari immediati, ma importantissimi:
+
+\begin{cor}
+    Per ogni polinomio $f\in A$, se $G$ è base di qualche ideale, nella riduzione $f\xrightarrow{G}_\ast r$ il resto è unico.
+\end{cor}
+
+\begin{thm}
+    Ogni ideale $I\subset k[x_1,\dots,x_n]$ è finitamente generato, o equivalentemente ogni successione di ideali $I_1\subset I_2\subset\dots$ si stabilizza.
+\end{thm}
+
+Unicità della base minimale??\\
+
+Mostriamo ora un metodo per costruire una base di Gr\"obner partendo da dei generatori di un ideale.\\
+Per fare questo dobbiamo introdurre una nuova operazione tra polinomi, che permette di trovare nuovi termini di testa.
+
+\begin{defn}
+    Siano $f,g\in A$, con $\Deg f =(a_1,\dots,a_n)$ e $\Deg g=(b_1,\dots,b_n)$; considero $\gamma=(\max(a_1,b_1),\dots,\max(a_n,b_n))$ e definisco $S(f,g)=\dfrac{X^\gamma}{\lt(f)}\cdot f - \dfrac{X^\gamma}{\lt(g)}\cdot g$ come \emph{$S$-polinomio} di $f$ e $g$.
+\end{defn}
+\begin{exmp}
+    Se $f=xy^2+x,g=x^2y+y$ e considero il $\mathtt{deg-lex}$, allora $S(f,g)=xf-yg=x^2-y^2$
+\end{exmp}
+\begin{prop}
+    Dato un insieme $G=\{g_1,\dots,g_k\}$, questo è una base di Gr\"obner se e solo se $S(g_i,g_j)\xrightarrow{G}_\ast0$ per goni coppia $i,j$
+\end{prop}
+
+Allora possiamo scrivere un algoritmo che, partendo da un insieme di generatori, calcoli una base di Gr\"obner semplicemente prendendo tutti i possibili $S$-polinomi.
+
+\begin{algorithm}[H]
+    \DontPrintSemicolon
+    \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+    \Input{$F=\{f_1,\dots,f_s\}$}
+    \Output{$G=\{g_1,\dots,g_t\}$ base di Gr\"obner di $I$}
+    $G=F,t=s$\;
+    $B=\{(i,j)\st1\le i<j\le s\}$\;
+    \While{$B\neq\emptyset$}{
+        scegli un $(i,j)\in B$\;
+        $S(g_i,g_j)\xrightarrow{G}_\ast h$ ridotto\;
+        \If{$h\neq0$}{
+            $t=t+1,g_t=h$\;
+            $G=G\cup \{g_t\}$\;
+            $B=B\cup\{(i,t)\st 1\le i<t\}$\;
+        }
+        $B=B\setminus\{(i,j)\}$\;
+    }
+    \caption{Algoritmo di Buchberger}
+\end{algorithm}
+
+Questo algoritmo termina, poiché ad ogni passo si ingrandisce $G$, ovvero si ha una catena $\Lt(G_1)\subset\Lt(G_2)\subset\dots$; ma dato che ogni ideale è finitamente generato, ad un certo punto questa catena si stabilizza, ovvero non aggiungo più elementi a $G$.\\
+\begin{exmp}
+    Consideriamo $I=(f_1,f_2)=(xy^2+x,x^2y+y)$, e calcoliamone una base.
+\end{exmp}
+
+\begin{thm}[Eliminazione]
+    Sia $I\subset k[x_1,\dots,x_n]$ un ideale e $G$ una base di Gr\"obner di $I$ secondo l'ordinamento $\mathtt{lex}$. Consideriamo $I_k=I\cap k[x_{k+1},\dots,x_n]$ il $k$-esimo ideale di eliminazione e $G_k=G\cap k[x_{k+1},\dots,x_n]$.\\
+    Allora $G_k$ è una base di Gr\"obner di $I_k$
+\end{thm}
+
+Osserviamo che $\faktor{k[x_1,\dots,x_n]}{I}$ è uno spazio vettoriale su $k$, generato dai resti nella divisione per $I$.
+\begin{prop}
+    Sia $I\subset k[x_1,\dots,x_n]$ un ideale; sono fatti equivalenti
+    \begin{enumerate}
+        \item $\dim_k \faktor{k[x_1,\dots,x_n]}{I}$ è finita
+        \item $\forall i\;\exists h_i\in I$ tali che $\lt(h_i)=x_i^{s_i}$
+        \item Presa $G=\{g_1,\dots,g_t\}$ una base di Gr\"obner, $\forall i\;\exists g_h\in G$ tali che $\lt(g_h)=x_i^{s_i}$
+    \end{enumerate}
+\end{prop}
+\begin{myproof}
+    \begin{itemize}
+        \item[$3\Rightarrow2$] Ovvio
+        \item[$2\Rightarrow3$] Allora per ogni $i$, $x_i^{s_i}\in\Lt(I)$, perciò esiste un elemento di base $g_h$ per cui $\lt(g_h)\mid x_i^{s_i}$, da cui anche $\lt(g_h)$ è una potenza pura.
+        \item[$1\Rightarrow2$] Se la dimensione è $m$ finito, vuol dire che, fissato un $i$, esistono $c_j$ non tutti nulli per cui $\sum c_j x_i^j=0$; perciò risollevando abbiamo $\sum c_j x_i^j\in I$ che ha termine di testa potenza pura.
+        \item[$3\Rightarrow1$] Gli elementi del quoziente possono essere visti come i resti delle riduzioni $f\xrightarrow{G}_\ast r$ con $f\in k[x_1,\dots,x_n]$; ma allora $r=\sum c_\alpha X^\alpha$ e $X^\alpha\not\in\Lt(I)$ e poiché in $\Lt(I)$ ci sono tutte le potenze pure, $\lt(r)$ ha ciascuno degli esponenti boundato, perciò i possibili monomi di testa sono finiti, e questi sono proprio una base per lo spazio vettoriale quoziente.
+    \end{itemize}
+\end{myproof}
+
+\begin{defn}
+    Un ideale $I$ che soddisfa una delle condizioni precedenti è detto $0$-dimensionale.
+\end{defn}
 
 \subsection{Risoluzione dei sistemi di equazioni polinomiali}
-Varietà affine\\
-Risultante\\
-Estensione\\
-Nullstellensatz\\
+In questo capitolo studieremo i sistemi del tipo $$\begin{cases}
+    f_1=0\\
+    \vdots\\
+    f_k=0
+\end{cases}$$
+dove $f_i\in k[x_1,\dots,x_n]$, con $k$ algebricamente chiuso, e vogliamo trovarne le soluzioni.\\
+Osserviamo che se tutti gli $f_i$ hanno grado $1$, questo sistema è esattamente un problema dell'algebra lineare, che sappiamo risolvere triangolando la matrice associata.\\
+Cominciamo intanto con un paio di oggetti molto importanti:
+\begin{defn}
+    Dato $I\subset k[X]$, la \emph{varietà affine} di $I$ è $V(I)=\{\alpha\in k^n\st f(\alpha)=0\;\forall f\in I\}$.\\
+    Dato $W\subset k^n$, l'\emph{ideale} di $W$ è $\mathcal{I}(W)=\{f\in k[X]\st f(\alpha)=0\;\forall\alpha\in W\}$
+\end{defn}
+\begin{oss}
+    Le cose con i $x^n$ e le inclusioni
+\end{oss}
+
+Un altro strumento fondamentale per indagare i sistemi polinomiali è la matrice di Sylvester, e in particolare il suo determinante
+\begin{defn}
+    Siano $f,g\in R[x]$ con $R$ dominio; scriviamo $f=\sum^m a_ix^i$ e $g=\sum^n b_ix^i$.\\
+    La \emph{matrice di Sylvester} è la seguente matrice $(m+n)\times(m+n)$:
+    $$\Syl(f,g) = \begin{pmatrix}
+    a_m & a_{m-1} & & \cdots & & a_1 & a_0 & 0 & \cdots & 0 \\
+    0 & a_m & & \cdots & & & a_1 & a_0 & \cdots &  0 \\
+    \vdots & & \ddots \\
+    0 & \cdots & 0 & a_m & a_{m-1} & \cdots & \cdots & a_2 & a_1 & a_0 \\
+    b_n & \cdots & & b_1 & b_0 & & \cdots\\
+    \vdots\\
+    0 & & & & & b_n & & & & b_0
+
+    \end{pmatrix}$$
+    Il \emph{risultante} di $f,g$ è $\Ris(f,g)=\det \Syl(f,g)$
+\end{defn}
+\begin{oss}
+    Se uno tra $f$ e $g$ è una costante, ovvero ha grado $0$, la matrice di Sylvester è diagonale.
+\end{oss}
+\begin{prop}
+    \begin{itemize}
+        \item $\Ris(f,g)\in R$
+        \item $\Ris(g,f)=(-1)^{mn}\Ris(f,g)$
+        \item $\Ris(af,g)=a^n\Ris(f,g)$ se $a\in R$
+    \end{itemize}
+\end{prop}
+
+Dimostriamo ora alcune proprietà importanti del risultante.\\
+Consideriamo il polinomio $f_m(x)=\prod(x-z_i)$ dove $z_1,\dots,z_m$ sono incognite; se espandiamo il prodotto, abbiamo $f_m(x)=\sum a_i^{(m)}x^i$ dove i coefficienti sono i polinomi simmetrici elementari.
+\begin{lemma}
+    Dato $g=\sum b_ix^i\in R[x]$, vale $$\Ris(f_m,g)=g(z_m)\Ris(f_{m-1},g)$$
+\end{lemma}
+\begin{myproof}
+    Consideriamo la matrice $\Syl(f_m,g)$, e facciamo le seguenti operazioni elementari: moltiplichiamo la colonna $i$ per $z_m^{n+m-i}$ e sommiamola all'ultima colonna.\\
+    Dopo queste operazioni l'ultima colonna diventa esattamente $\begin{pmatrix} z_m^{n-1}f_m(z_m) \\ \vdots \\ f_m(z_m) \\ z_m^{m-1}g(z_m) \\ \vdots g(z_m) \end{pmatrix}$, ma poichè $f_m(z_m)=0$, possiamo riscriverla come $g(z_m)\begin{pmatrix} 0 \\ \vdots \\ 0 \\ z_m^{m-1} \\ \vdots 1 \end{pmatrix}$.\\
+    Dato che le operazioni elementari non cambiano il determinante, possiamo calcolare $\Ris(f_m,g)$ usando questa matrice con l'ultima colonna modificata, che chiamiamo $A$; in particolare $\Ris(f_m,g)=g(z_m)\cdot\det A$. Se consideriamo quest'uguaglianza come tra polinomi in $z_m$, vediamo che a sinistra il grado è al più $n$ (infatti ogni $a_i^{(m)}$ è lineare in $z_m$), mentre a destra almeno $n$ (c'è infatti il polinomio $g$ di grado $n$ valutato in $z_m$); ciò vuol dire che il grado è esattamente $n$, ed in particolare $\det A$ è indipendente da $z_m$.\\
+    Allora per calcolare $\det A$ possiamo porre $z_m=0$, perciò espandendo rispetto all'ultima colonna abbiamo $\det A=1\cdot\det B$, dove $B$ è il minore delle prime $m+n-1$ righe e $m+n-1$ colonne; osserviamo che $B=\Syl(f_{m-1},g)$ in quanto vale proprio $a_{i-1}^{(m-1)}(z_1,\dots,z_{m-1})=a_i^{(m)}(z_1,\dots,z_{m-1},0)$.
+\end{myproof}
+
+Come immediata conseguenza di questo lemma otteniamo il seguente
+\begin{thm}
+    Siano $f(x)=a_m\prod(x-\alpha_i)$ e $g(x)=b_n\prod(x-\beta_i)$. Allora vale
+    $$\begin{array}{lll} \Ris(f,g)&=& \displaystyle(-1)^{mn}b_n^m\prod f(\beta_i)\\
+    &=&\displaystyle a_m^n\prod g(\alpha_i) \\
+    &=&\displaystyle a_m^nb_n^m\prod_{i,j}(\alpha_i-\beta_j) \end{array}$$
+\end{thm}
+
+Vediamo ora come il risultante sia un indicatore dei fattori comuni a $f$ e $g$
+\begin{prop}
+    Dati $f,g\in R[x]$, esistono $A,B\in R[x]$ tali che $\deg A<\deg g$, $\deg B<\deg f$ e $\Ris(f,g)=Af+Bg$
+\end{prop}
+\begin{myproof}
+
+\end{myproof}
+
+\begin{thm}[Estensione]
+    Sia $I=(f_1,\dots,f_s)\subset k[x_1,\dots,x_n]$ e $I_1=I\cap k[x_2,\dots,x_n]$ il primo ideale di eliminazione; supponiamo $k=\bar k$. Scriviamo $f_i=g_i(x_2,\dots,x_n)\cdot x_1^{n_i}+\bar f_i$ con $\deg_{x_1}\bar f_i<n_i$.\\
+    Sia $\alpha\in V(I_1)$ tale che $\alpha\not\in V(g_1,\dots,g_s)$; allora esiste un $a\in k$ tale che $(a,\alpha)\in V(I)$.
+\end{thm}
+
+\begin{thm}[Nullstellensatz]
+    Sia $k$ algebricamente chiuso e $I\subset k[x_1,\dots,x_n]$ un ideale. Valgono
+    \begin{itemize}
+        \item forma debole: $V(I)=\emptyset\iff I=(1)$
+        \item forma forte: $\mathcal I(V(I))=\sqrt I$
+    \end{itemize}
+\end{thm}
+
 
 
 
