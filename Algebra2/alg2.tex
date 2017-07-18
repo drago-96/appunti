@@ -40,8 +40,10 @@
 \DeclareMathOperator{\Deg}{Deg}
 \DeclareMathOperator{\Syl}{Syl}
 \DeclareMathOperator{\Ris}{Ris}
+\DeclareMathOperator{\Imm}{Im}
 \DeclareMathOperator{\st}{\; |\;}
 \DeclareMathOperator{\et}{\;\wedge\;}
+
 \newcommand{\m}{\mathfrak{m}}
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -49,6 +51,8 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\D}{\mathcal{D}}
 \newcommand{\Zn}[1]{\Z/#1\Z}
+\newcommand{\gen}[1]{\ensuremath{\left< #1\right>}}
+\newcommand{\normal}{\mathrel{\unlhd}}
 
 \title{Algebra 2}
 \author{Riccardo Zanotto}
@@ -647,7 +651,7 @@ Mostriamo ora un metodo per costruire una base di Gr\"obner partendo da dei gene
 Per fare questo dobbiamo introdurre una nuova operazione tra polinomi, che permette di trovare nuovi termini di testa.
 
 \begin{defn}
-    Siano $f,g\in A$, con $\Deg f =(a_1,\dots,a_n)$ e $\Deg g=(b_1,\dots,b_n)$; considero $\gamma=(\max(a_1,b_1),\dots,\max(a_n,b_n))$ e definisco $S(f,g)=\dfrac{X^\gamma}{\lt(f)}\cdot f - \dfrac{X^\gamma}{\lt(g)}\cdot g$ come \emph{$S$-polinomio} di $f$ e $g$.
+    Siano $f,g\in A$, con $\Deg f =(a_1,\dots,a_n)$ e $\Deg g=(b_1,\dots,b_n)$; considero $\gamma=(\max(a_1,b_1),\dots,\max(a_n,b_n))$ e definisco $$S(f,g)=\dfrac{X^\gamma}{\lt(f)}\cdot f - \dfrac{X^\gamma}{\lt(g)}\cdot g$$ come \emph{$S$-polinomio} di $f$ e $g$.
 \end{defn}
 \begin{exmp}
     Se $f=xy^2+x,g=x^2y+y$ e considero il $\mathtt{deg-lex}$, allora $S(f,g)=xf-yg=x^2-y^2$
@@ -799,6 +803,82 @@ Vediamo ora come il risultante sia un indicatore dei fattori comuni a $f$ e $g$
 
 
 \section{Moduli}
+
+Introduciamo ora una nuova struttura algebrica che generalizza il concetto di spazio vettoriale, con il quale ha alcune somiglianze ma anche profonde differenze.
+\subsection{Definizioni}
+In tutto questo paragrafo $A$ sarà un anello con unità.\\
+\begin{defn}
+    Dato un insieme $M$ diciamo che è un \emph{$A$-modulo} se $(M,+)$ è un gruppo abeliano, ed esiste una funzione $\cdot:A\times M\to M$ che soddisfa le seguenti proprietà:
+    \begin{itemize}
+        \item $(a+b)\cdot m=a\cdot m+b\cdot m$
+        \item $a\cdot(m+n)=a\cdot m+a\cdot n$
+        \item $a\cdot(b\cdot m)=(ab)\cdot m$
+        \item $1\cdot m=m$
+    \end{itemize}
+\end{defn}
+Ovvero stiamo dotando un gruppo additivo di un prodotto per scalare, esattamente come uno spazio vettoriale; tuttavia essendo gli scalari elementi di un anello, spesso non si possono invertire.\\
+In particolare, se $A$ è un campo, allora un $A$-modulo è esattamente uno spazio vettoriale.
+\begin{oss}
+    $0_A\cdot m=0_M$ e $a\cdot 0_M=0_M$
+\end{oss}
+\begin{exmp}
+    $M=A$ è un $A$-modulo.\\ Se $A=\Z$, gli $A$-moduli sono i gruppi abeliani.\\ $A[x]$ è un $A$-modulo.
+\end{exmp}
+\begin{defn}
+    $N\subset M$ è sottomodulo di $M$ se $(N,+)<(M,+)$ e $\forall a\in A,n\in N$ si ha $an\in N$
+\end{defn}
+Se $I$ è un ideale di $A$, $M$ è un $A$-modulo, possiamo definire il sottomodulo $I\cdot M=\{ \sum a_im_i\st a_i\in I,m_i\in M \}$.\\
+Inoltre, se $M_1,M_2\subset M$ sono sottomoduli, posso considerare la somma $M_1+M_2=\{m_1+m_2\st m_1\in M_1,m_2\in M_2\}$.\\
+Osserviamo che se ho una famiglia $\{M_i\}$ di sottomoduli, allora l'intersezione $\bigcap M_i$ è ancora un sottomodulo.
+\begin{defn}
+    Dato un sottoinsieme $S\subset M$, il sottomodulo generato è $\gen{S}=\{ \sum a_is_i\st a_i\in A,s_i\in S \}$
+\end{defn}
+Andiamo ora a vedere come viene modificato il concetto di base rispetto agli spazi vettoriali.
+\begin{defn}$ $
+    \begin{itemize}
+        \item $S$ si dice \emph{insieme di generatori} di $M$ se $\gen{S}=M$, ovvero ogni $m\in M$ si scrive come $m=\sum a_is_i$.\\
+        Se $M$ ammete un insieme di generatori di cardinalità finita, si dice che $M$ è \emph{finitamente generato}.
+        \item $S\subset M$ si dice \emph{libero} se i suoi elementi sono linearmente indipendenti, ovvero $\sum a_is_i=0\Rightarrow a_i=0\forall i$.
+        \item Un insieme di generatori che è anche libero si dice \emph{base} di $M$.
+    \end{itemize}
+\end{defn}
+
+Osserviamo che, al contrario degli spazi vettoriali, non tutti i moduli ammettono una base.\\
+Ad esempio, $\Zn{n}$ come $\Z$-modulo non ha una base: se $g$ è un suo generatore (ad esempio $1$), abbiamo $n\cdot g=0$, ma $n\neq0$ in $\Z$; tuttavia se lo consideriamo come $\Zn{n}$-modulo, $1$ è anche libero, perciò $\{1\}$ è una base.\\
+Considerando inoltre $A^n=A\times\dots\times A$ come $A$-modulo, in analogia agli spazi vettoriali, questo ha per base i vettori coordinati.\\
+\begin{defn}
+    Un $A$-modulo è detto \emph{libero} se ammette una base.
+\end{defn}
+\begin{defn}
+    Un'applicazione $f:M\to N$ dove $M,N$ sono $A$-moduli è detta \emph{omomorfismo} se soddisfa
+    \begin{itemize}
+        \item $f(m+n)=f(m)+f(n)$
+        \item $f(a\cdot m)=a\cdot f(m)$
+    \end{itemize}
+\end{defn}
+Possiamo inoltre definire nella solita maniera $\ker f$ e $\Imm f$, che sono \emph{entrambi} sottomoduli.\\
+\\
+\begin{defn}
+    Sia $M$ un $A$-modulo e $N\subset M$ un sottomodulo; poichè $N\normal M$ come gruppi additivi, esiste il gruppo quoziente $\faktor{M}{N}$.\\
+    Posso ora metterci una struttura di $A$-modulo, ponendo $a\cdot(m+N)=am+N$, che è una buona definizione in quanto $aN\subset N$.\\
+    Questo modulo è detto \emph{quoziente} di $M$ per $N$.
+\end{defn}
+In analogia a gruppi e anelli, abbiamo i vari teoremi di omomorfismo.
+\begin{thm}
+    Siano $M,N$ due $A$-moduli, e $f:M\to N$ un omomorfismo di moduli. Allora $\Imm f\cong \faktor{M}{\ker f}$
+\end{thm}
+\begin{myproof}
+    Abbiamo intanto l'isomorfismo $\varphi: \faktor{M}{\ker f}\to \Imm f$ come gruppi dato da $\varphi(m+\ker f)=f(m)$.\\
+    Osserviamo ora che $\varphi(a\cdot(m+\ker f))=\varphi(am+\ker f)=f(am)=af(m)=a\varphi(m+\ker f)$, cioè $\varphi$ è anche omomorfismo di $A$-moduli.
+\end{myproof}
+\begin{thm}
+    Siano $M_1,M_2\subset M$ due sottomoduli. Allora vale $\faktor{M_1+M_2}{M_2}\cong\faktor{M_1}{M_1\cap M_2}$
+\end{thm}
+\begin{oss}
+    Se prendo un ideale $I\subset A$ e $M$ un $A$-modulo, allora $\faktor{M}{IM}$ ha la struttura di $\faktor{A}{I}$-modulo.\\
+    Infatti $(a+I)(m+IM)=am+aIM+Im+IIM=am+IM$ è ben definita.
+\end{oss}
+
 
 
 
