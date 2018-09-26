@@ -1,0 +1,111 @@
+\chapter{Introduzione}
+In questo corso tratteremo prevalentemente la teoria analitica additiva; in particolare useremo il metodo del cerchio di Hardy-Littlewood per approcciarci ai seguenti problemi:
+\begin{itemize}
+    \item problema di Waring
+    \item problema di Goldbach
+    \item problema di Erdos, Roth, Szemeredi
+\end{itemize}
+\section{Il problema di Erdos}
+L'ultimo problema è stato proposto da Erdos nella seguente forma:
+\begin{congettura}[Erdos]
+    Sia $E\subset\N$ un insieme tale che $\overline d(E)=\limsup_{N\to\infty}\frac{\# E\cap[1,N]}{N}>0$. Allora esistono tre elementi di $E$ in progressione aritmetica.
+\end{congettura}
+Il problema in questa forma venne risolto da Roth nel 1953; in seguito venne mostrato il seguente
+\begin{theorem}[Szemeredi, 1975]
+    Sia $E\subset\N$ un insieme tale che $\overline d(E)>0$. Allora esistono segmenti di progressioni aritmetiche arbitrariamente lunghi.
+\end{theorem}
+Negli ultimi anni si è arrivati anche al seguente risultato
+\begin{theorem}[Green e Tao, 2004]
+    L'insieme dei numeri primi contiene progressioni aritmetiche arbitrariamente lunghe
+\end{theorem}
+
+\section{Il problema di Waring}
+Un risultato molto importante nella teoria elementare dei numeri è il famoso ``teorema dei quattro quadrati'', ovvero
+\begin{theorem}[Lagrange, 1770]
+    Ogni intero positivo si può scrivere come somma di al più quattro quadrati.
+\end{theorem}
+Nello stesso anno, Waring propose la seguente generalizzazione:
+\begin{congettura}[Waring, 1770]
+    Ogni intero positivo si scrive come somma di al più 9 cubi, 19 potenze quarte, e così via...
+\end{congettura}
+Questa frase ci porta a definire il nostro oggetto di studio:
+\begin{definition}
+    Fissato $k$, sia $g(k)$ il minimo intero (eventualmente infinito) tale che ogni $n\in\N$ si può scrivere come somma di $g(k)$ potenze $k$-esime.
+\end{definition}
+Uno dei primi risultati su $g(k)$ è un bound dal basso:
+\begin{proposition}[Eulero]
+    $\ds g(k)\ge2^k+\left\lfloor \left(\frac{3}{2}\right)^k \right\rfloor -2$
+\end{proposition}
+\begin{proof}
+    Sia $n_k=2^k\cdot\left\lfloor \left(\frac{3}{2}\right)^k \right\rfloor-1$; si vede facilmente che $n_k<3^k$. Quindi per scriverlo come somma di potenze $k$-esime possiamo usare solamente $1^k,2^k$.\\
+    Tuttavia $2^k\cdot\left\lfloor \left(\frac{3}{2}\right)^k \right\rfloor>n_k$, perciò possiamo usare al più $\left\lfloor \left(\frac{3}{2}\right)^k \right\rfloor-1$ volte il $2^k$.\\
+    Rimane poi $n_k-2^k\cdot\left( \left\lfloor \left(\frac{3}{2}\right)^k \right\rfloor -1 \right)=2^k-1$, per cui possiamo usare solo gli $1^k$, e ce ne servono $2^k-1$.\\
+    Sommando le due quantità otteniamo ul bound cercato.
+\end{proof}
+\begin{oss}
+    Sebbene questo sembri un bound banale, in realtà è molto forte: se calcoliamo il valore del bound per $2,3,4$ otteniamo $4,9,19$ che sono esattamente i valori congetturati da Waring.
+\end{oss}
+Nell'ultimo secolo si è infatti dimostrato che
+\begin{theorem}[Mahler, 1957]
+    $\ds g(k)=2^k+\left\lfloor \left(\frac{3}{2}\right)^k \right\rfloor -2$, tranne al più un numero finito di $k$.
+\end{theorem}
+Un importante risultato di inizio secolo è il seguente
+\begin{theorem}[Hilbert, 1909]
+    Il numero $g(k)$ esiste finito per ogni intero $k$.
+\end{theorem}
+
+Dato che lo studio di $g(k)$ è quasi completamente risolto, si è iniziata a studiare un'altra quantità
+\begin{definition}
+    Si indica con $G(k)$ il minimo intero $s$ tale che ogni intero sufficientemente grande è scrivibile come somma di $s$ potenze $k$-esime.
+\end{definition}
+\begin{oss}
+    Vale ovviamente $G(k)\le g(k)$ e quindi anche $G(k)$ è finito $\forall k$.
+\end{oss}
+Lo studio di questa funzione è molto più difficile di quello di $g(k)$. Alcuni dei risultati che si hanno sono
+\begin{theorem}[Davenport, 1939]
+    $G(4)=16$
+\end{theorem}
+\begin{theorem}[Vaughan e Wooley]
+    $G(k)\le k\log k+k\log\log k+ Ck$
+\end{theorem}
+
+
+\section{Il problema di Goldbach}
+Questo è uno dei problemi più famosi della matematica, data la semplicità dell'enunciato:
+\begin{congettura}[Goldbach, 1742]$ $
+    \begin{itemize}
+        \item Forma forte: Ogni intero pari è esprimibile come somma di due primi.
+        \item Forma debole: Ogni intero è scrivibile come somma di al più tre primi.
+    \end{itemize}
+\end{congettura}
+
+Un risultato parziale è il seguente
+\begin{theorem}[Helfgott, 2013]
+    Ogni intero dispari $n\ge7$ si scrive come somma di tre primi dispari.
+\end{theorem}
+
+Ci sono metodi ``probabilistici'' per vedere che asintoticamente molti numeri soddisfano la congettura.\\
+Ad esempio, Hardy e Littlewood dimostrarono che il numero di rappresentazioni come somma di $k$ primi è asintotico a $c_k \frac{n^2}{\log^3n}$; tuttavia $c_2=0$, quindi la parte principale è un'altra.
+Abbiamo poi il seguente
+\begin{theorem}
+    Ogni intero positivo, tranne al più un insieme $E$, è somma di $2$ primi; con $E\cap[1,N]=O\left( \frac{N}{\log^\alpha N} \right)$ per ogni $\alpha$.
+\end{theorem}
+
+Un'altra strada è attraverso metodi di crivello, giungendo a risultati del tipo
+\begin{theorem}[Chen, 1973]
+    Ogni intero positivo sufficientemente grande è somma di un primo e di un semiprimo (ovvero di un prodotto di al più due primi).
+\end{theorem}
+
+
+\section{Il metodo di Hardy-Littlewood}
+Sia $a_m$ una successione crescente di interi; siamo interessati a studiare il comportamento della quantità $R_s(n)$ che è il numero di rappresentazioni di $n$ come somma di $s$ termini della successione.
+
+Introduciamo allora la serie di potenze $F(z)=\sum_{m\ge0} z^{a_m}$. Vale allora
+$$ F^s(z)=\sum_{n\ge0}z^n\cdot R_s(n)$$
+
+Dato che $F$ è olomorfa in $|z|<1$, possiamo usare il teorema di Cauchy per ottenere
+$$ R_s(n)=\oint_{|z|=\rho}\frac{F^s(z)}{z^{n+1}}dz$$
+
+\begin{notazione}
+    Definiamo $e(\alpha)=e^{2\pi i\alpha}$. Diciamo che $f\ll g$ se $f=O(g)$.
+\end{notazione}

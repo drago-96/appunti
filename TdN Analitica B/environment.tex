@@ -1,0 +1,125 @@
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{commath}
+\usepackage{mathtools}
+\usepackage{faktor}
+\usepackage[]{algorithm2e}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{mathrsfs}
+\usepackage{array}
+\usepackage{rotating}
+\usepackage{multirow}
+\usepackage{breqn}
+%\setcounter{secnumdepth}{5}
+\setlength\extrarowheight{3pt}
+
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    %filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+
+
+\newtheorem{theorem}{Teorema}[section]
+\newtheorem*{theorem*}{Teorema}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{congettura}[theorem]{Congettura}
+%\newtheorem{algorithm}[theorem]{Algoritmo}
+\newtheorem{axiom}[theorem]{Assioma}
+\newtheorem{case}[theorem]{Caso}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusione}
+%\newtheorem{condition}[theorem]{Condizione}
+\newtheorem{conjecture}[theorem]{Congettura}
+\newtheorem{corollary}[theorem]{Corollario}
+\newtheorem{criterion}[theorem]{Criterio}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notazione}
+\newtheorem{problem}[theorem]{Problema}
+\newtheorem{proposition}[theorem]{Proposizione}
+\newtheorem{summary}[theorem]{Riassunto}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definizione}
+\newtheorem{example}[theorem]{Esempio}
+\newtheorem{exercise}{Esercizio}[section]
+\newtheorem{solution}[exercise]{Soluzione}
+\newtheorem*{notazione}{Notazione}
+
+
+\newcommand{\todo}[1]{ \marginpar{\textbf{TODO:} \textcolor{red}{#1}} }
+
+\theoremstyle{remark}
+%\newtheorem*{remark}[theorem]{Osservazione}
+\newtheorem*{oss}{Osservazione}
+
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{0.5in}
+
+
+
+
+
+\newenvironment{mysol}{%
+    \begin{sol}$ $\nobreak\ignorespaces
+    }{%
+        \qedhere
+    \end{sol}
+}
+
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\ann}{Ann}
+\DeclareMathOperator{\lt}{lt}
+\DeclareMathOperator{\Lt}{Lt}
+\DeclareMathOperator{\Deg}{Deg}
+\DeclareMathOperator{\Syl}{Syl}
+\DeclareMathOperator{\Ris}{Ris}
+\DeclareMathOperator{\Imm}{Im}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\car}{char}
+\DeclareMathOperator{\p}{\mathcal P}
+\DeclareMathOperator{\st}{\; |\;}
+\DeclareMathOperator{\et}{\;\wedge\;}
+\DeclareMathOperator{\tr}{Tr}
+\DeclareMathOperator{\n}{N}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\GL}{GL}
+
+
+\newcommand{\m}{\mathfrak{m}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Zn}[1]{\Z/#1\Z}
+\newcommand{\gen}[1]{\ensuremath{\left< #1\right>}}
+\newcommand{\normal}{\mathrel{\unlhd}}
+\newcommand{\sing}[1]{\{#1\}}
+\newcommand{\ds}{\displaystyle}
+\newcommand{\eps}{\varepsilon}
+
+\renewcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\vp}[1]{\upsilon_p\left(#1\right)}
+\newcommand{\np}[1]{\left|#1\right|_p}
+\newcommand{\pf}{\mathfrak{p}}
+\newcommand{\qf}{\mathfrak{q}}
+\newcommand{\Pf}{\mathfrak{P}}
+\newcommand{\Oc}{\mathcal{O}}
+\newcommand{\vpf}[1]{\upsilon_\pf\left(#1\right)}
+\newcommand{\vPf}[1]{\upsilon_\Pf\left(#1\right)}
+\newcommand{\npf}[1]{\left|#1\right|_\pf}
