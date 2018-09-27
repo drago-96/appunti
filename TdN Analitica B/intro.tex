@@ -109,3 +109,10 @@ $$ R_s(n)=\oint_{|z|=\rho}\frac{F^s(z)}{z^{n+1}}dz$$
 \begin{notazione}
     Definiamo $e(\alpha)=e^{2\pi i\alpha}$. Diciamo che $f\ll g$ se $f=O(g)$.
 \end{notazione}
+
+Una variante del metodo, che permette di integrare sul cerchio unitario, si ottiene considerando somme parziali del tipo $S(\alpha)=\sum_{m\le N} e(\alpha a_m)$ in modo da ottenere
+$$S^s(\alpha)=\sum_{m\le N\cdot s} R_s(m,N)e(\alpha m) $$
+dove $R_s(m,n)$ indica il numero di modi di scrivere $m$ come somma di $s$ elementi della successione, ognuno $\le N$.
+
+Usando allora l'ortogonalità delle funzioni $e(\alpha k)$, possiamo ricavare che
+$$R_s(m,N)=\int_{0}^{1}S^s(\alpha)e(-\alpha m)d\alpha$$

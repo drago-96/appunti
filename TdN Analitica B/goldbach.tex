@@ -1,0 +1,70 @@
+\chapter{Il problema di Goldbach}
+Approcciamo ora le congetture di Goldbach, dimostrandone una forma debole.
+
+\section{Richiami sui numeri primi}
+Ci serviranno alcuni risultati classici, stile PNT.
+
+\begin{definition}
+    La funzione $\Lambda$ di von Mangoldt è data da $$\Lambda(n)=\begin{cases}
+    \log p & \text{se } n=p^a \\
+    0 & \text{altrimenti}
+    \end{cases}$$
+    Sia poi $\psi(x)=\sum_{n\le x}\Lambda(n)$ la funzione $\psi$ di Chebycheff.\\
+    Infine definiamo la $\theta$ di Chebycheff: $\theta(x)=\sum_{p\le x}\log p$ dove la somma è fatta sui primi.
+\end{definition}
+\begin{proposition}
+    Si verificano facilmente le seguenti proprietà:
+    \begin{itemize}
+        \item $e^{\psi(N)}=mcm(1,2,\dots,N)$.
+        \item $\psi(x)=\sum_{i=1}^{\lfloor\log_2(x)\rfloor}\theta(x^{1/i})$.
+    \end{itemize}
+\end{proposition}
+
+Un teorema classico è il seguente
+\begin{theorem}
+    $x \ll \psi(x), \theta(x) \ll x$.
+\end{theorem}
+che raffinato diventa il teorema dei numeri primi
+\begin{theorem}[PNT]\label{pnt}
+    $\psi(x)\sim \theta(x) \sim x$.
+\end{theorem}
+
+\section{Il teorema di Vinogradov}
+L'oggetto di studio di questa sezione è la seguente funzione
+\begin{definition}
+    Dato $N\ge2$, sia $\ds r(N)=\sum_{k_1+k_2+k_3=N}\Lambda(k_1)\cdot\Lambda(k_2)\cdot\Lambda(k_3)$
+\end{definition}
+L'obiettivo finale sarà dimostrare il
+\begin{theorem}[Vinogradov, 1930]Per ogni $A>0$ vale
+    $$ r(N)=\frac12\sigma(N)\cdot N^2+O\left( \frac{N^2}{(\log N)^A} \right) $$
+    dove $\ds\sigma(N)= \prod_{p\mid N}\left( 1-\frac{1}{(p-1)^2} \right) \cdot \prod_{p\nmid N}\left( 1+\frac{1}{(p-1)^3} \right)$
+\end{theorem}
+\begin{oss}
+    Se $N$ è pari, allora $\sigma(N)=0$, quindi la parte principale svanisce e occorre studiare meglio il resto.
+\end{oss}
+
+Vediamo intanto come il teorema risolve la congettura di Goldbach sui dispari.
+
+Detta $r^\ast(N)=\sum_{p_1+p_2+p_3=N}\log(p_1)\log(p_2)\log(p_3)$, si può vedere che è molto vicina lla $r(N)$ che stiamo studiando.\\
+Infatti, consideriamo i termini di $r(N)$ in cui almeno un $k_i$ (diciamo $k_1$) è una potenza di un primo con esponente almeno $2$; ma allora deve essere $k_1\le\sqrt{N}$ e quindi si ricava $r(N)-r^\ast(N)\le \sum_{k_1\le\sqrt{N}}\Lambda(k_1)\cdot \sum_{k_2+k_3\le N}\Lambda(k_2)\Lambda(k_3)$.\\
+Il primo fattore è esattamente $\psi(\sqrt{N})$, che per il PNT è $\ll\sqrt N$; il secondo fattore può essere maggiorato con $\sum_{k_2\le N}\Lambda(k_2)\cdot\log N$, ovvero $\psi(N)\log N$ che di nuovo è $\ll N\log N$.\\
+Concludiamo cioè che $r(N)=r^\ast(N)+O(N^{3/2}\log N)$.\\
+Abbiamo allora il
+\begin{corollary}
+    Ogni intero dispari $N$ sufficientemente grande è somma di $3$ primi in almeno $c\dfrac{N^2}{\log^3N}$ modi, con $c>0$.
+\end{corollary}
+\begin{proof}
+    Per il teorema di Vinogradov e la stima appena vista, la parte principale di $r^\ast(N)$ è $c N^2$.\\
+    Inoltre $\ds r^\ast(N)=\sum_{p_1+p_2+p_3=N}\log(p_1)\log(p_2)\log(p_3) \le \sum_{p_1+p_2+p_3=N}\log^3(N)$, cioè il numero di modi di scrivere $N$ come somma di $3$ primi è almeno $\frac{r^\ast(N)}{\log^3(N)}$.
+\end{proof}
+
+Per la dimostrazione del teorema di Vinogradov ci serviranno un po' di lemmi.
+
+L'idea comunque è di considerare la funzione $S(\alpha,N)=\sum_{k\le N}\Lambda(k)e(\alpha k)$, da cui $S^3(\alpha,N)=\sum_{l\le 3N}e(\alpha l) r(l,N)$.\\
+Quindi per inversione di Fourier possiamo scrivere
+$$ r(N)=\int_{0}^{1}S^3(\alpha,N)e(-\alpha N)d\alpha $$
+
+Dividiamo in archi principali e secondari...
+
+
+
