@@ -1,0 +1,250 @@
+\chapter{Algebra commutativa}
+
+\section{Estensioni intere}
+\begin{definition}
+ Dati $A\subset B$ anelli, $b\in B$ si dice \emph{intero su $A$} se esiste un polinomio monico $f\in A[t]$ tale che $f(b)=0$.\\
+ Se $I\subset A$ è un ideale, diciamo che $b$ è intero su $I$ se esiste $f\in I[t]$ monico che annulla $b$.\\
+ Se $f:A\to B$ è morfismo di anelli con $1$, $I\subset A$, diciamo che $b$ è intero su $I$ se lo è su $I^e$.
+\end{definition}
+
+\begin{proposition}
+    Siano $A\subset B$, $b\in B$. Sono equivalenti:
+    \begin{enumerate}
+        \item $b$ è intero su $A$.
+        \item $A[b]$ è finitamente generato come $A$-modulo.
+        \item $\exists C$ anello tale che $A[b]\subset C \subset B$ e $C$ è fin. gen. come $A$-modulo.
+        \item $\exists M$ un $A[b]$-modulo fedele, fin. gen. come $A$-modulo.
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    Siano $A\subset B$.
+    \begin{itemize}
+        \item Definiamo $\overline{A}^B=\{ b\in B \st b \text{ è intero su } A \}$ la \emph{chiusura integrale} di $A$ in $B$.
+        \item Diciamo che $A\subset B$ è \emph{intera} se vale $\overline{A}^B = B$.
+        \item Diciamo che $A\subset B$ è \emph{finita} se $B$ è un $A$-modulo finitamente generato.
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}$ $
+    \begin{itemize}
+        \item Se $b_1,\dots, b_n\in B$ sono interi su $A$, allora $A[b_1,\dots,b_n]$ è fin. gen. come $A$-modulo.
+        \item $\overline{A}^B$ è un sottoanello di $B$.
+        \item Un'este  nsione finita è anche intera.
+        \item Se $A\subset B\subset C$ con $A\subset B, B\subset C$ finite, allora anche $A\subset C$ è finita.
+        \item Se $A\subset B\subset C$ con $A\subset B, B\subset C$ intere, allora anche $A\subset C$ è intera.
+    \end{itemize}
+\end{proposition}
+
+\begin{lemma}
+    Sia $A\subset B$ intera, $I\subset A$ ideale. Detto $\overline{I}^B=\{ b\in B \st b \text{ è intero su } I \}$, vale $\overline{I}^B = \sqrt{I^e}$.
+\end{lemma}
+
+\begin{proposition}$ $
+    \begin{itemize}
+        \item Sia $A\subset B$ intera e $J\subset B$; allora $\faktor{A}{J^c}\subset \faktor{B}{J}$ è intera.
+        \item Vale $\overline{S^{-1}A}^{S^{-1}B}=S^{-1}(\overline{A}^B) $
+    \end{itemize}
+\end{proposition}
+
+\begin{definition}
+    Se $A$ è un dominio, sia $K$ il campo dei quozienti. Si dice che $A$ è \emph{normale} se $\overline{A}^K=A$.
+\end{definition}
+
+\begin{proposition}
+    Ogni UFD è normale.
+\end{proposition}
+
+\begin{theorem}
+    Sia $A$ dominio normale, $K$ il campo dei quozienti; sia $K\subset L$ un'estensione algebrica. Dato un $x\in L$ vale $x\in \overline{A}^L \iff \mu_x(t)\in A[t]$.
+\end{theorem}
+
+\begin{example}
+    Se $A=\Z, K=\Q, L=\Q[\sqrt d]$, allora $\overline{A}^L=\begin{cases}
+    \Z[\sqrt d] & d\equiv 2,3\pmod 4 \\
+    \Z\left[ \frac{1+\sqrt d}{2} \right] & d\equiv 1\pmod 4
+    \end{cases}$
+\end{example}
+
+\begin{lemma}
+    Sia $A\subset B$ intera, con $A,B$ domini. Allora $A$ è un campo se e solo se $B$ è un campo.
+\end{lemma}
+
+\begin{corollary}
+    Sia $A\subset B$ intera, $\pf\subset B$ primo. Allora $\pf$ è massimale se e solo se $\pf^c$ è massimale.
+\end{corollary}
+
+\begin{lemma}
+    Sia $A\subset B$ intera, $\pf\subset \qf\subset B$ ideali primi. Se $\pf^c=\qf^c$ allora $\pf=\qf$.
+\end{lemma}
+
+\begin{theorem}[lying over]
+    Sia $A\subset B$ intera. Allora $\varphi:\Spec B\to\Spec A$ è surgettiva, ovvero per ogni $\pf\subset A$ esiste $\qf\subset B$ tale che $\qf^c=\qf\cap A=\pf$.
+\end{theorem}
+
+\begin{definition} Sia $A\subset B$, e $\pf_1\subset \pf_2\subset A$ ideali primi.
+    \begin{itemize}
+        \item Si dice che vale il \emph{going up} se dato $\qf_1\subset B$ con $\qf_1^c=\pf_1$, allora esiste $\qf_2\supset\qf_1$ con $\qf_2^c=\pf_2$.
+        \item Si dice che vale il \emph{going down} se dato $\qf_2\subset B$ con $\qf_2^c=\pf_2$, allora esiste $\qf_1\subset\qf_2$ con $\qf_1^c=\pf_1$.
+    \end{itemize}
+\end{definition}
+
+\begin{theorem} Sia $A\subset B$.
+    \begin{itemize}
+        \item Se l'estensione è intera, allora $\varphi: \Spec B\to\Spec A$ è chiusa.
+        \item Se $\varphi: \Spec B\to\Spec A$ è chiusa, allora vale il going up.
+    \end{itemize}
+\end{theorem}
+
+\begin{proposition}
+    Sia $A\subset B$; se vale il going up e $B$ è noetheriano, allora $\varphi:\Spec B\to\Spec A$ è chiusa.
+\end{proposition}
+
+\begin{lemma}
+    Sia $f:A\to B$, e $\varphi:Y=\Spec B\to \Spec A=X$; dato $\qf\in Y$, definiamo $Y_\qf=\{ r\in Y \st r\subset \qf \}$. Allora
+    \begin{enumerate}
+        \item $Y_\qf=\bigcap_{\alpha\not\in \qf} Y_\alpha$
+        \item $\varphi(Y_\qf)=\bigcap_{\alpha\not\in \qf} \varphi(Y_\alpha)$
+    \end{enumerate}
+\end{lemma}
+
+\begin{theorem}
+    Sia $f:A\to B$ e $\varphi:\Spec B\to\Spec A$. Se $\varphi$ è aperta, allora vale il going down per $f$.
+\end{theorem}
+
+\begin{theorem}
+    Sia $A\subset B$ intera con $A,B$ domini, e $A$ normale. Allora $\varphi:\Spec B\to\Spec A$ è aperta.
+\end{theorem}
+
+\begin{proposition}
+    Sia $f:A\to B$, e supponiamo che valga il going down; se $A$ è noetheriano, allora $\varphi$ è aperta.
+\end{proposition}
+
+
+\section{Dimensione}
+
+\begin{definition}
+    La \emph{dimensione} di un anello $A$ è la massima lunghezza di una catena di ideali primi: se $\pf_0\subsetneq \pf_1\subsetneq\dots\subsetneq\pf_n$, allora diciamo che $\dim A\ge n$.
+\end{definition}
+
+\begin{proposition}
+    Se $A\subset B$ è intera, allora $\dim A=\dim B$.
+\end{proposition}
+
+\begin{theorem}
+    Sia $A$ una $k$-algebra fin. gen, $A=k[y_1,\dots,y_n]$ (le $y_i$ sono generatori come algebra); allora esistono $x_1,\dots,x_m\in A$ algebricamente indipendenti tali che $k[x_1,\dots,x_m]\subset A$ è intera.\\
+    Inoltre se $y_1,\dots,y_n$ sono algebricamente dipendenti, allora $m<n$ e per $k$ infinito le $x_i$ possono essere scelte come combinazioni lineari delle $y_j$.
+\end{theorem}
+
+\begin{proposition}
+    Vale $\dim k[x_1,\dots,x_n]=\dim k[x_1,\dots,x_n]_f=n$ per ogni $f\in k[x_1,\dots,x_n]$.
+\end{proposition}
+
+\begin{definition}
+    Se $A$ è un dominio e $k\subset A$, una \emph{base di trascendenza} di $A$ su $k$ è un insieme massimale di elementi algebricamente indipendenti
+\end{definition}
+
+\begin{lemma}
+    Se $x_\alpha$ è base di trascendenza di $A$ su $k$, allora l'estensione $k(x_\alpha)\subset \Q(A)$ è algebrica.
+\end{lemma}
+
+\begin{theorem}
+    Tutte le basi di trascendeza hanno la stessa cardinalità.
+\end{theorem}
+
+\begin{corollary}
+    Se $A$ è una $k$-algebra fin. gen. e un dominio, allora $\dim A=\tr\deg_k A$.
+\end{corollary}
+
+
+\begin{definition}
+    Sia $\pf\subset A$ un ideale primo; definiamo
+    \begin{itemize}
+        \item l'\emph{altezza} $\h(\pf) = \dim A_\pf = \max \{n\st \qf_0\subsetneq\dots\subsetneq\qf_n=\pf  \}$
+        \item la \emph{coaltezza} $\coh(\pf) = \dim A / \pf = \max \{n\st \pf = \qf_0\subsetneq\dots\subsetneq\qf_n  \}$
+    \end{itemize}
+\end{definition}
+
+\begin{lemma}
+    Sia $A$ un dominio e una $k$-algebra fin. gen; sia $\pf$ un primo di altezza $1$. Allora $\dim A / \pf=\dim A - 1$.
+\end{lemma}
+
+\begin{theorem}
+    Sia $A$ una $k$-algebra fin. gen. Allora
+    \begin{enumerate}
+        \item Se $\pf\in\Spec A$, allora $\h(\pf),\coh(\pf)<\infty$.
+        \item Dati $\pf\subset\qf$ due primi, ogni catena massimale $\pf=\pf_0\subsetneq\dots\subsetneq\pf_r=\qf$ ha lunghezza $\coh(\pf)-\coh(\qf)$.
+        \item Se $A$ è un dominio, $\pf\in\Spec A$, allora vale $\dim A = \h(\pf)+\coh(\pf)$.
+    \end{enumerate}
+\end{theorem}
+
+Cosa succede in dimensione bassa?
+
+\begin{theorem}
+    Sia $A$ un anello. Allora $A$ è artiniano se e solo se è noetheriano e $\dim A=0$.
+\end{theorem}
+
+
+
+\section{Azione di Galois}
+Sia $A$ un dominio normale, $K=\Q(A)$ e $L\supset K$ un'estensione di Galois con gruppo $G$; sia $B=\overline{A}^L$.\\
+Definiamo $Y=\Spec B, X=\Spec A, \varphi:Y\to X$; sia poi $Y_\pf=\varphi^{-1}(\pf)$, cioè i primi di $B$ che stanno sopra $A$.
+
+\begin{oss}
+    Se $b\in B$, allora $\sigma(b)\in B$ per ogni $\sigma\in G$.\\
+    Inoltre se $\qf\in Y_\pf$, allora $\sigma(\qf)\in Y_\pf$.
+\end{oss}
+
+\begin{theorem}
+    Il gruppo $G$ agisce transitivamente sull'insieme $Y_\pf$.
+\end{theorem}
+
+\begin{definition}
+    Fissato un primo $\qf\in Y$, definiamo il \emph{gruppo di decomposizione} $G_\qf=\{ \sigma\in G \st \sigma(\qf)=\qf \}$.\\
+    Se $\pf=\qf^c$, detto $S=A\setminus\pf$, otteniamo un'estensione di campi $k(\pf)=\faktor{S^{-1}A}{S^{-1}\pf} \subset \faktor{S^{-1}B}{S^{-1}\qf} =k(\qf)$
+\end{definition}
+
+\begin{proposition}
+    $G_\qf$ agisce dunque su $k(\qf)$ tenendo fisso $k(\pf)$, e la mappa $G_\qf\to\{ \varphi:k(\qf)\to k(\qf) \st \rest{\varphi}{k(\pf)}=\id \}$ è surgettiva
+\end{proposition}
+
+Lezione 18/10
+
+\section{Valutazioni e completamenti}
+
+\begin{definition}
+    Sia $k$ un campo; una mappa $v: k^\ast\to\Q$ si dice \emph{valutazione} se rispetta
+    \begin{itemize}
+        \item $v(xy)=v(x)+v(y)$
+        \item $v(x+y)\ge\min(v(x),v(y))$
+    \end{itemize}
+    Data una valutazione si definisce $A=\{x\in k \st v(x)\ge0 \}$ e $\m=\{ x\in k\st v(x)>0 \}$ un ideale di $A$.\\
+    $v$ si dice \emph{discreta} se $\Imm v=\Z\cdot q$ per qualche $q\neq0$; in questo caso $A$ è un DVR.
+\end{definition}
+
+\begin{proposition}
+    Sia $A$ l'anello appena definito. Allora
+    \begin{itemize}
+        \item $A$ è anello locale con unico massimale $\m$.
+        \item Se $v$ è discreta, allora $A$ è noetheriano, $\dim A=1$ e tutti gli ideali sono della forma $(\pi^m)$ dove $v(\pi)=q$.
+    \end{itemize}
+\end{proposition}
+
+\begin{theorem}
+    Sia $A$ un anello locale noetheriano, con $\dim A=1$. Allora sono equivalenti:
+    \begin{enumerate}
+        \item $A$ è un DVR
+        \item $A$ è un dominio normale
+        \item l'ideale massimale è principale
+    \end{enumerate}
+\end{theorem}
+
+\begin{oss}
+    Nel caso valgano le condizioni sopra, allora $\dim_{A/\m}\m/\m^2=1$.
+\end{oss}
+
+\begin{proposition}
+    Sia $f\in\C[x,y]$ irriducibile, e $A=\faktor{\C[x,y]}{(f)}$. Allora $A$ è normale se e solo se $f=0$ è una curva liscia, ovvero $\nabla f\neq 0$ nei punti in cui $f=0$.
+\end{proposition}
+
+

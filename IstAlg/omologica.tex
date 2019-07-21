@@ -1,0 +1,285 @@
+\chapter{Algebra omologica}
+
+\section{$E$-strutture e $H^1$ di gruppi}
+
+\begin{lemma}
+    Sia $E\subset F$ finita di Galois con gruppo $\Gamma$; $V$ un $E$-spazio vettoriale.
+    \begin{enumerate}
+        \item Detto $V_F=F\otimes_E V$, $\Gamma$ agisce su $V_F$ tramite $\gamma(\lambda\otimes v)=\gamma(\lambda)\otimes v$ per $v\in V$. Valgono allora
+        \begin{itemize}
+            \item $V_F^\Gamma = V$
+            \item $\gamma(\lambda v)=\gamma(\lambda)\gamma(v)$ per $v\in V_F$
+        \end{itemize}
+        \item Se $W$ è un $F$ spazio vettoriale, e $\Gamma$ agisce su $W$ in modo che $\gamma(\lambda v)=\gamma(\lambda)\gamma(v)$, allora detto $W_0=W^\Gamma$ valgono
+        \begin{itemize}
+            \item $W_0$ è un $E$-spazio vettoriale
+            \item la mappa $F\otimes_E W_0\to W$ che manda $\lambda\otimes v\mapsto \lambda v$ è un isomorfismo
+        \end{itemize}
+    \end{enumerate}
+\end{lemma}
+
+
+\begin{theorem}
+    Sia $E\subset F$ un'estensione di Galois infinita. Allora $$\Gal{F}{E}\cong \lim_{\substack{\longleftarrow\\ [L:E]<\infty}}\Gal{L}{E}$$
+\end{theorem}
+\begin{definition}
+    Data $E\subset F$ di Galois, un'azione di $\Gal{F}{E}$ su uno spazio $X$ è detta \emph{continua} se $\forall x\in X\;\exists L\supset E$ finita di Galois, con $\Gal{F}{L}\subset\stab x$
+\end{definition}
+
+\begin{lemma}
+    Sia $E\subset F$ di Galois infinita, $V$ un $F$-spazio vettoriale; supponiamo che $\Gamma=\Gal{F}{E}$ agisca in modo continuo su $V$ e valga $\gamma(\lambda v)=\gamma(\lambda)\gamma(v)$; allora valgono le conclusioni del punto $2$ del lemma precedente, in particolare $V\cong F\otimes_E V^\Gamma$.
+\end{lemma}
+
+\begin{definition}
+    Sia $E\subset F$ estensione di Galois con gruppo $\Gamma$; siano $A_0,B$ due $E$-algebre, e $R=F\otimes A_0\cong F\otimes B$. Sia $\gamma_0 = \gamma\otimes_E \id_{A_0}$ l'azione di $\Gamma$ estesa su $R$, e similmente $\gamma_B$.\\
+    Sia $c:\Gamma\to \Aut(R)$ dato da $c_\gamma=\gamma_B\cdot\gamma_A^{-1}$.
+\end{definition}
+
+\begin{proposition}$ $
+    \begin{itemize}
+        \item Per ogni $\gamma$, $c_\gamma$ è $F$-lineare, quindi ho definito $c:\Gamma\to \Aut_F(R)$
+        \item Vale $c_{\gamma\delta}=c_\gamma\circ ^\gamma c_\delta$, dove $^\gamma\varphi=\gamma_0\circ\varphi\circ\gamma_0^{-1}$
+    \end{itemize}
+\end{proposition}
+
+\begin{definition}
+    Definiamo $Z^1(\Gamma, \Aut_F(R)) = \{ c:\Gamma\to\Aut_F(R)\st c_{\gamma\delta}=c_\gamma\circ ^\gamma c_\delta \}$.\\
+    Se $c,c'\in Z^1$, diciamo che $c\sim c'$ se $\exists f\in\Aut_F R$ tale che $c'_\gamma=f\circ c_\gamma\circ ^\gamma f^{-1}$.\\
+    Definiamo poi $H^1(\Gamma, \Aut_F(R))=\faktor{Z^1(\Gamma, \Aut_F(R))}{\sim}$
+\end{definition}
+
+\begin{theorem}
+    $$\faktor{ \{ E\text{-strutture di }A \} }{\text{isomorfismo}} \cong H^1(\Gamma, \Aut_F(R)) $$
+\end{theorem}
+
+
+\bigskip
+Sia ora $G$ un gruppo che agisce sullo spazio $X$; sia $\Gamma$ un gruppo che agisce su $G$ conservando il prodotto e su $X$ compatibilmente con $G$.
+
+\begin{definition}
+    Sia $Z^1(\Gamma,G)=\{ c:\Gamma\to G \st c_{\gamma\delta}=c_\gamma\cdot ^\gamma c_\delta \}$.\\
+    Diciamo inoltre che $c\sim d$ se esiste $g\in G$ tale che $d_\gamma = g\cdot c_\gamma\cdot ^\gamma(g^{-1})$.\\
+    Sia infine $H^1(\Gamma, G)=\faktor{Z^1(\Gamma,G)}{\sim}$.
+\end{definition}
+
+\begin{proposition}
+    Sia $1\rightarrow H\rightarrow G\rightarrow K\rightarrow 1$ una successione esatta di gruppi su cui agisce $\Gamma$ in modo compatibile con le mappe.\\
+    Allora $1\rightarrow H^\Gamma\rightarrow G^\Gamma\rightarrow K^\Gamma\rightarrow H^1(\Gamma, H)\rightarrow H^1(\Gamma, G)\rightarrow H^1(\Gamma, K)$ è una successione esatta di insiemi puntati.
+\end{proposition}
+
+\begin{theorem}[Hilbert 90]
+    Sia $E\subset F$ di Galois finita con gruppo $\Gamma$; sia $G=\GL_n(F)$ e $\Gamma$ agisce su $G$ coefficiente per coefficiente. Allora $H^1(\Gamma,\GL_n(F))=\{1\}$.
+\end{theorem}
+
+\begin{corollary}
+    Anche $H^1(\Gamma,\SL_n(F))=\{1\}$.
+\end{corollary}
+
+\begin{proposition}
+    Sia $x_0\in X^\Gamma$ e $H=\stab_G x_0$; supponiamo che $G$ agisca transitivamente su $X$. Se $H^1(\Gamma, G)=\{1\}$, allora le orbite di $G^\Gamma$ in $X^\Gamma$ sono in bigezione con $H^1(\Gamma, H)$.
+\end{proposition}
+
+
+
+\section{Categorie abeliane e complessi}
+
+\begin{definition}
+    Una categoria $\mathcal{C}$ si dice \emph{additiva} se soddisfa le seguenti proprietà:
+    \begin{itemize}
+        \item $\forall X,Y\in\mathcal{C}$, l'insieme $\Hom(X,Y)$ è un gruppo abeliano
+        \item La composizione di morfismi $\Hom(Y,Z)\times\Hom(X,Y)\to\Hom(X,Z)$ è bilineare
+        \item Esiste un oggetto zero, cioè $0\in\mathcal C$ tale che $\Hom(X,0)=\Hom(0,X)$ sono il gruppo banale
+        \item Dati $X,Y\in\mathcal C$ esiste il coprodotto $X\coprod Y$, definito dalla seguente proprietà universale:
+        $\begin{tikzcd}
+         & Z & \\
+         X \ar[r,"i_X"'] \ar[ur, "f"] & X\coprod Y \ar[u,dashrightarrow] & Y \ar[l,"i_Y"] \ar[ul, "g"']
+        \end{tikzcd}$
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    In una categoria additiva, il coprodotto è isomorfo al prodotto, e si indica con $X\oplus Y$.
+\end{proposition}
+
+\begin{definition}
+    Fissata una mappa $\varphi: X\to Y$, diciamo che:
+    \begin{itemize}
+        \item $\ell:Z\to X$ è il \emph{nucleo} di $\varphi$ se $\varphi\circ\ell=0$ e per ogni $\alpha: U\to X$ tale che $\varphi\circ \alpha=0$, esiste un'unica $\tilde\alpha:U\to Z$ che faccia commutare\\
+        $\begin{tikzcd}
+        Z \ar[r, "\ell"] & X \ar[r, "\varphi"] & Y \\
+         & U \ar[u,"\alpha"] \ar[ul, dashrightarrow, "\tilde\alpha"]
+        \end{tikzcd}$
+        \item $m:Y\to Q$ è il \emph{conucleo} di $\varphi$ se $m\circ\varphi=0$ e per ogni $\beta: Y\to U$ tale che $\beta\circ\varphi=0$, esiste un'unica $\tilde\beta:Q\to U$ che faccia commutare\\
+        $\begin{tikzcd}
+        X \ar[r, "\varphi"] & Y \ar[r, "m"] \ar[d,"\beta"] & Q \ar[dl, dashrightarrow, "\tilde\beta"] \\
+        & U 
+        \end{tikzcd}$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    Una categoria additiva $\mathcal{C}$ è detta \emph{abeliana} se per ogni mappa $\varphi: X\to Y$ esistono $\alpha=\ker\varphi$ e $\beta=\coker\varphi$, e inoltre $\coker\alpha\cong\ker\beta$ e questo oggetto si dice $\Imm\varphi$.
+    $$\begin{tikzcd}
+    K \ar[r,"\alpha"] & X \ar[r,"\varphi"] \ar[d, "\pi"] & Y \ar[r,"\beta"] & Q \\
+     & \coker\alpha \ar[ur, dashrightarrow, "\psi"] \ar[r, dashrightarrow, "\Phi"',"\sim"] & \ker\beta \ar[u,"j"] &
+    \end{tikzcd}$$
+\end{definition}
+
+\begin{proposition}
+    In una categoria abeliana $\varphi$ è un isomorfismo se e solo se $\ker\varphi=0$ e $\coker\varphi=0$.
+\end{proposition}
+
+\begin{definition}
+    La successione $X\xrightarrow{\varphi} Y \xrightarrow{\psi} Z$ si dice \emph{esatta} in $Y$ se $\psi\varphi=0$ e vale $\Imm\varphi\cong \ker\psi$ (o equivalentemente $\Imm\psi\cong\coker\varphi$).
+\end{definition}
+
+\begin{proposition}
+    In una categoria abeliana valgono lo snake lemma e il lemma dei 5.
+\end{proposition}
+
+\begin{theorem}
+    In realtà le categorie abeliane sono gli $A$-moduli...
+\end{theorem}
+
+\subsection{Complessi}
+Mettiamoci in una categoria abeliana $\mathcal{C}$.\\
+
+\begin{definition}
+    Una \emph{complesso} $X^\bullet$ è una successione di oggetti e frecce $$ \dots\xrightarrow{\de^{n-1}} X^n \xrightarrow{\de^{n}} X^{n+1} \xrightarrow{\de^{n+1}}\dots $$
+    tali che $\de^{n+1}\circ\de^n = 0$ per ogni $n\in\Z$.\\
+    Un \emph{morfismo di complessi} $\varphi^\bullet:X^\bullet\to Y^\bullet$ è una successione di mappe $\varphi^n:X^n\to Y^n$ tali che tutti i quadrati commutino:
+    $$\begin{tikzcd}
+    X^{n-1} \ar[r,"\de_X^{n-1}"] \ar[d,"\varphi^{n-1}"] & X^{n} \ar[r,"\de_X^{n}"] \ar[d,"\varphi^{n}"] & X^{n+1} \ar[d,"\varphi^{n+1}"] \\
+    Y^{n-1} \ar[r,"\de_Y^{n-1}"] & Y^{n} \ar[r,"\de_Y^{n}"] & Y^{n+1}
+    \end{tikzcd}$$
+    Possiamo allora considerare le categorie $\Com(\mathcal{C})$, $\Com^+(\mathcal{C})$ e $\Com^-(\mathcal{C})$ dei complessi (eventualmente limitati in una delle due direzioni).
+\end{definition}
+
+\begin{proposition}
+    Le categorie $\Com(\mathcal{C})$, $\Com^+(\mathcal{C})$ e $\Com^-(\mathcal{C})$ sono abeliane.
+\end{proposition}
+
+\begin{definition}
+    Sia $X^\bullet$ un complesso; definiamo $Z^n(X)=\ker(\de^n)$ e $B^n(X)=\Imm(\de^{n-1})$. Definiamo poi $H^n(X)=\faktor{Z^n(X)}{B^n(X)}$ l'$n$-esimo gruppo di coomologia.
+\end{definition}
+
+\begin{proposition}
+    Se $\varphi^\bullet:X^\bullet\to Y^\bullet$ è morfismo di complessi, otteniamo una successione di mappe $H^n(\varphi):H^n(X)\to H^n(Y)$.
+\end{proposition}
+
+\begin{theorem}
+    Sia $0\rightarrow X^\bullet\xrightarrow{\varphi^\bullet} Y^\bullet \xrightarrow{\psi^\bullet} Z^\bullet\rightarrow 0$ una successione esatta di complessi. Allora la successione $$H^n(X)\to H^n(Y)\to H^n(Z)\xrightarrow{\omega_n} H^{n+1}(X)\to H^{n+1}(Y)\to H^{n+1}(Z)$$
+    è esatta.
+\end{theorem}
+
+\begin{definition}
+    Sia $\varphi: X^\bullet\to Y^\bullet$; diciamo che $\varphi\sim0$ è \emph{omotopa} a $0$ se esistono delle mappe $h^n: X^n\to Y^{n-1}$ tali che $\varphi^n=\de_Y^{n-1}\circ h^n + h^{n+1}\circ\de_X^n$.
+\end{definition}
+
+\begin{proposition}
+    Se $\varphi\sim0$, allora vale $H^n(\varphi)=0$; in particolare se vale $\id\sim0$, allora il complesso è esatto.
+\end{proposition}
+
+\begin{definition}
+    Se $X^\bullet$ è un complesso, diciamo che il complesso $Y^\bullet$ è una \emph{risoluzione iniettiva} di $X^\bullet$ se gli $Y^n$ sono oggetti iniettivi ed esiste un morfismo di complessi $\varphi^\bullet:X^\bullet\to Y^\bullet$ che sia un isomorfismo in coomologia.
+\end{definition}
+
+\begin{definition}
+    Sia $A\in\mathcal C$ e $F:\mathcal C\to\mathcal C'$ un funtore additivo, esatto a sinistra.\\
+    Sia $I^\bullet$ una risoluzione iniettiva del complesso $\dots\to0\to A\to0\to\dots$.\\
+    Definiamo l'$i$-esimo funtore derivato come $R^iF(A)=H^i(FI^\bullet)$ l'$i$-esimo gruppo di coomologia del complesso $0\to FI^0\to FI^1\to\dots$.
+\end{definition}
+\begin{oss}
+    Verificheremo che la risoluzione iniettiva esiste, e che il funtore derivato non dipende dalla scelta della risoluzione iniettiva.
+\end{oss}
+
+
+\begin{definition}
+    Se $X^\bullet$ è un complesso, diciamo che il complesso $P^\bullet$ è una \emph{risoluzione proiettiva} di $X^\bullet$ se i $P^n$ sono oggetti iniettivi ed esiste un morfismo di complessi $\varphi^\bullet:P^\bullet\to X^\bullet$ che sia un isomorfismo in coomologia.
+\end{definition}
+
+\begin{definition}
+    Sia $A\in\mathcal C$ e $F:\mathcal C\to\mathcal C'$ un funtore controvariante, additivo, esatto a sinistra.\\
+    Sia $P^\bullet$ una risoluzione iniettiva del complesso $\dots\to0\to A\to0\to\dots$.\\
+    Definiamo l'$i$-esimo funtore derivato come $L^iF(A)=H^i(FP^\bullet)$ l'$i$-esimo gruppo di coomologia del complesso $0\to FP^0\to FP^1\to\dots$.
+\end{definition}
+
+\begin{definition}
+    Siano $X,Y$ oggetti; siano $F,G$ i funtori $F=\Hom(X,-)$ e $G=\Hom(-,Y)$.\\
+    Definiamo allora $\Ext^i(X,Y)=R^iF(Y)$ e $\underline{\Ext}^i(X,Y)=L^iG(X)$.
+\end{definition}
+
+\begin{example}
+    Siano $m,n\in\Z$ e scriviamo $m=dm',n=dn'$ con $d=\gcd(m,n)$.\\
+    Allora $\underline{\Ext}^0(\faktor{\Z}{(m)}, \faktor{\Z}{(m)})\cong \underline{\Ext}^1(\faktor{\Z}{(m)}, \faktor{\Z}{(m)})\cong \faktor{\Z}{(d)}$.
+\end{example}
+
+\begin{proposition}
+    Se $X,Y$ sono oggetti, allora $\Ext^i(X,Y)\cong\underline{\Ext}^i(X,Y)$.
+\end{proposition}
+
+\section{Coomologia di gruppi}
+
+Sia $G$ un gruppo e $R$ un anello commutativo con unità. Lavoreremo nella categoria degli $R[G]$ moduli, dove $R[G]=\bigoplus_{g\in G}Re_g$.
+
+\begin{definition}
+    Sia $M$ un $R[G]$-modulo; definiamo $F_1(M)=M^G=\Hom_{R[G]}(R,M)$ e $F_2(M)=\faktor{M}{\langle m-gm \rangle}=R\otimes_{R[G]}M$.\\
+    Definiamo $H^n(G,M)=\Ext^n(R,M)=R^nF_1(M)$; sappiamo però che è isomorfo a $\underline{\Ext}^n(R,M)$, che è il funtore derivato di $\Hom_{R[G]}(-,M)$.\\
+    Inoltre $H_n(G,M)=\Tor_n(R,M)$ il funtore derivato di $F_2$.
+\end{definition}
+
+\begin{proposition}[risoluzione libera di $R$]
+    Siano $P^0=R[G],P^{-1}=R[G\times G],P^{-2}=R[G\times G\times G],\dots$; sia $\eps:P^0\to R$ data da $\eps(g)=1$.\\
+    Sia poi $\de^{-n}:P^{-n}\to P^{-n+1}$ data da $$\de^{-n}(e_{g_0,\dots,g_n})=\sum_{i=0}^n (-1)^i e_{g_0,\dots,\hat{g_i},\dots,g_n}$$
+    Allora la successione $0\leftarrow R\xleftarrow{\eps} P^0\xleftarrow{\de^{-1}}P^{-1}\xleftarrow{\de^{-2}}\dots$ è una risoluzione proiettiva di $R$.
+\end{proposition}
+
+\begin{proposition}
+    La mappa $\Phi_n:\Hom_{R[G]}(P^{-n},M)\to \{ f:G^n\to M \}=:C^n(G,M)$ data da $\Phi_n(\psi)(g_1,\dots,g_n)=\psi(1,g_1,g_1g_2,\dots,g_1\cdots g_n)$ è un isomorfismo.\\
+    Inoltre la mappa $\delta_C^n:C^n(G,M)\to C^{n+1}(G,M)$ data da $\delta_C^n f=\Phi_{n+1}((\Phi_n^{-1}f)\circ\de^{-n})$ ha la formula esplicita \begin{dmath*} (\delta_C^n f)(g_1,\dots,g_{n+1}) = g_1\cdot f(g_2,\dots,g_{n+1})+\sum_{i=1}^n (-1)^i f(g_1,\dots, g_i\cdot g_{i+1},\dots, g_{n+1})+(-1)^nf(g_1,\dots,g_n) \end{dmath*}
+\end{proposition}
+
+\begin{example}
+    Osserviamo che $(\delta^0f)(g)=gf(1)-f(1)$ e $(\delta^2f)(g,h)=gf(h)-f(gh)+f(g)$, ovvero $Z^1(G,M)=\{ f:G\to M\st f(gh)=f(g)+gf(h) \}$ e perciò $H^1(G,M)=\faktor{Z^1}{ \{g\mapsto gm-m \} }$, che è esattamente la definizione data nel capitolo precedente con i cocicli $c_\gamma$.
+\end{example}
+
+\begin{definition}
+    Sia $f:H\to G$ un omomorfismo di gruppi e $M$ un $G$-modulo. Allora $f^\ast M$ è un $H$-modulo tramite l'azione $h\cdot m=f(h)m$.\\
+    Inoltre $f$ induce un morfismo di complessi $C^q(G,M)\to C^q(H,M)$, da cui si ottiene una mappa $Res^q: H^q(G,M)\to H^q(H,f^\ast M)$ in coomologia. \\
+\end{definition}
+
+\begin{definition}
+        Sia $f:H\to G$ un omomorfismo di gruppi e $N$ un $H$-modulo.\\
+        Definiamo $\ind_H^G N=R[G]\otimes_{R[H]} N$ che è un $G$-modulo tramite $g\cdot(x\otimes n)=xg\otimes n$.\\
+        Definiamo poi $\coind_H^G N=\Hom_H(R[G],N)$, dove $R[G]$ è un $H$-modulo tramite l'azione $h\cdot g= gf(h^{-1})$. Questo ha una struttura di $G$-modulo con l'azione $(g\cdot\varphi)(x)=\varphi(g^{-1}x)$.
+\end{definition}
+
+\begin{proposition}
+    Sia $M$ un $G$-modulo e $N$ un $H$-modulo, e $f:H\to G$. Allora valgono
+    \begin{itemize}
+        \item $\Hom_H(N,f^\ast M)\cong\Hom_G(\ind_H^G,M)$
+        \item $\Hom_H(f^\ast M, N)\cong\Hom_G(M,\coind_H^G N)$
+    \end{itemize}
+\end{proposition}
+
+\begin{proposition}
+    Siano $F,G$ due funtori aggiunti tra due categorie $\mathcal A,\mathcal B$, ovvero tali che $\Hom_{\mathcal A}(a,Gb)=\Hom_{\mathcal B}(Fa,b)$. Allora valgono:
+    \begin{itemize}
+        \item $F$ conserva i limiti diretti, è esatto a destra e manda proiettivi in proiettivi
+        \item $G$ conserva i limiti inversi, è esatto a sinistra e manda iniettivi in iniettivi
+        \item Se $\mathcal A,\mathcal B$ sono abeliane, $F$ e $G$ sono additivi
+    \end{itemize}
+\end{proposition}
+
+\begin{theorem}
+    Sia $H<G$ e $N$ un $H$-modulo. Allora
+    \begin{itemize}
+        \item $H^i(G,\coind_H^G N)=H^i(H,N)$
+        \item $H_i(G,\ind_H^G N)=H_i(H,N)$
+    \end{itemize}
+\end{theorem}
+
+
+\section{Gruppo di Brauer}
+
+\section{Costruzione dei funtori derivati}
