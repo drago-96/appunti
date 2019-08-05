@@ -142,7 +142,7 @@ Sia ora $G$ un gruppo che agisce sullo spazio $X$; sia $\Gamma$ un gruppo che ag
 \end{theorem}
 
 \subsection{Complessi}
-Mettiamoci in una categoria abeliana $\mathcal{C}$.\\
+Mettiamoci in una categoria abeliana $\mathcal{C}$.
 
 \begin{definition}
     Una \emph{complesso} $X^\bullet$ è una successione di oggetti e frecce $$ \dots\xrightarrow{\de^{n-1}} X^n \xrightarrow{\de^{n}} X^{n+1} \xrightarrow{\de^{n+1}}\dots $$
@@ -279,7 +279,370 @@ Sia $G$ un gruppo e $R$ un anello commutativo con unità. Lavoreremo nella categ
     \end{itemize}
 \end{theorem}
 
+\begin{definition}
+    Dato $G$ un gruppo, $H<G$ di indice finito, $M$ un $G$-modulo, abbiamo le mappe:
+    \begin{itemize}
+        \item $i:M^G\to M^H$ la mappa di inclusione
+        \item $N:M^H\to M^G$ la ``norma'': se $x_1,\dots,x_n$ sono i rappresentanti di $G/H$, definiamo $N(m)=\sum x_im$
+    \end{itemize}
+    Inoltre, se $0\to M\to I_M^\bullet$ è risoluzione iniettiva come $G$-modulo, lo è anche come $H$-modulo.
+    
+    Perciò le due mappe passano a mappe di complessi, e quindi in coomologia:
+    \begin{itemize}
+        \item $\res^q:H^q(G,M)\to H^q(H,M)$
+        \item $\cores^q:H^q(H,M)\to H^q(G,M)$
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    Sia $H<G$ di indice finito. Allora $\cores^q\circ\res^q=[G:H]\id$.
+\end{proposition}
+\begin{corollary}
+    Se $G$ è finito, vale $\#G\cdot H^q(G,M)=0$ per $q>0$.
+\end{corollary}
+
 
 \section{Gruppo di Brauer}
+Consideriamo ora anelli $A$ con unità, non necessariamente commutativi.
+
+\subsection{Algebre centrali semplici}
+
+\begin{definition}
+    Sia $M$ un $A$-modulo. Si dice \emph{semplice} se $M\neq0$ e non ha sottomoduli propri. $M$ si dice \emph{semisemplice} se $M=\sum_{S\subset M \text{ semplice}} S$.
+\end{definition}
+
+
+\begin{theorem}
+    Sia $A$ anello con $1$, $M$ un $A$-modulo. Sono equivalenti
+    \begin{enumerate}
+        \item $\exists S_i\subset M$ semplici tali che $M=\bigoplus S_i$.
+        \item $M$ è semisemplice.
+        \item Per ogni $N\subset M$ esiste un $P\subset M$ tale che $M=N\oplus P$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{oss}
+    Sottomoduli e quozienti di semisemplici sono semisemplici.
+\end{oss}
+
+\begin{definition}
+    Un anello $A$ si dice semisemplice se lo è come $A$-modulo sinistro.
+\end{definition}
+
+\begin{proposition}
+    Sia $A$ un anello. Sono equivalenti
+    \begin{enumerate}
+        \item $A$ è semisemplice.
+        \item Ogni $A$-modulo è semisemplice.
+        \item Ogni $A$-modulo è proiettivo.
+    \end{enumerate}
+\end{proposition}
+
+\begin{lemma}[Schur]
+    Siano $S,T$ moduli semplici. Allora
+    \begin{itemize}
+        \item Sia $\varphi:S\to T$. Si ha che $\varphi=0$ oppure è un isomorfismo.
+        \item $\End(S)$ è un corpo.
+    \end{itemize}
+\end{lemma}
+
+\begin{theorem}[Wedderburn]
+    Sia $A$ un anello semisemplice. Allora $A=\bigoplus_i \Mat_{n_i\times n_i}(D_i)$ con $D_i$ corpi univocamente determinati.
+\end{theorem}
+
+\begin{proposition}
+    Sia $E=\overline{E}$, e $D\supset E$ un corpo di dimensione finita con $E\subset Z(D)$. Allora $D=E$.
+\end{proposition}
+
+\begin{definition}
+    Una $E$-algebra $A$ di dimensione finita si dice \emph{centrale} se $Z(A)=E$; si dice \emph{semplice} se $A$ non contiene ideali bilateri non banali.
+\end{definition}
+
+\begin{proposition}
+    Sia $A$ una $E$-algebra di dimensione finita. Sono equivalenti
+    \begin{enumerate}
+        \item $A$ è semplice.
+        \item $A=\Mat_{n\times n}(D)$ con $D$ corpo tale che $E\subset Z(D)$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{corollary}
+    $A$ è un'$E$-algebra centrale semplice se e solo se $A=\Mat_{n\times n}(D)$, con $Z(D)=E$.
+\end{corollary}
+
+
+\begin{lemma}
+    Sia $V$ un $E$-spazio vettoriale, $D$ un corpo $E$-centrale, $V_D=V\otimes_E D$ e $W\subset V_D$ un sottospazio vettoriale stabile per $D$ a destra e a sinistra. Detto $W'=W\cap V$, vale $W=W'\otimes_ED$.
+\end{lemma}
+
+\begin{theorem}
+    Sia $A$ una $E$-acs; $E\subset F$ estensione di campi. Allora $F\otimes_E A$ è una $F$-acs.
+\end{theorem}
+
+\begin{theorem}
+    Siano $A,A'$ delle $E$-acs. Allora anche $A\otimes_E A'$ è una $E$-acs.
+\end{theorem}
+
+\begin{definition}
+    Sia $A$ una $E$-acs. Diciamo che \emph{spezza} su $F$ se $A\otimes_E F=\Mat_{n\times n}(F)$
+\end{definition}
+
+\begin{theorem}
+    Sia $A$ una $E$-acs. Allora esiste un'estensione di campi $E\subset F$ finita e separabile tale che $A$ spezza su $F$.
+\end{theorem}
+
+
+\begin{definition}
+    Sia $E$ un campo; definiamo il suo gruppo di Brauer come $\mathcal A=\faktor{ \{ E\text{-acs} \} }{\sim}$, dove $A\sim A'$ se sono algebre di matrici sullo stesso corpo.
+    
+    Questo è un gruppo, con l'operazione $[A]\cdot [A']=[A\otimes A']$ ed elemento neutro $[E]$.
+\end{definition}
+
+\begin{oss}
+    L'elemento inverso è l'algebra opposta, in quanto $A\otimes A^{op}=\End_E(A)=\Mat_{n\times n}(E)$.
+\end{oss}
+
+\subsection{Descrizione coomologica}
+
+\begin{lemma}
+    Dato un campo $F$ vale $\Aut_F(\Mat_{n\times n}(F))=PGL_n(F)$
+\end{lemma}
+
+\begin{definition}
+    Sia $E\subset L$ finita di Galois con gruppo $\Gamma$. Definiamo i seguenti oggetti:
+    \begin{itemize}
+        \item $\mathcal A_L=\{ [A]\in\mathcal A \st A\text{ spezza su } L \}$
+        \item $\mathcal A_n=\{ A\; E\text{-acs} \st \dim_E A=n^2 \}/\text{isom.}$
+        \item $\mathcal A_{n,L}= \{ A\; E\text{-acs} \st \dim_E A=n^2, A\text{ spezza su } L  \}/\text{isom.}$
+    \end{itemize}
+\end{definition}
+
+\begin{oss}
+    Le algebre $\mathcal A_{n,L}$ sono proprio le $E$-strutture di $\Mat_{n\times n}(L)$, pertanto c'è la corrispondenza biunivoca $\mathcal A_{n,L}\leftrightarrow H^1(\Gamma, PGL_n(L))$.
+\end{oss}
+
+\begin{definition}
+    Definiamo la mappa $\delta_{n,L}:\mathcal A_{n,L}\to H^2(\Gamma,L^\ast)$ tramite la successione lunga data da $1\to L^\ast\to GL_n(L)\to PGL_n(L)\to1$.
+\end{definition}
+
+\begin{lemma}
+    Siano $A\in\mathcal A_{n,L}$ e $A'\in\mathcal A_{m,L}$. Allora
+    \begin{itemize}
+        \item $\delta_{nm}(A\otimes A')=\delta_n(A)\cdot \delta_m(A')$.
+        \item Se $[A]=[A']$ nel gruppo di Brauer, allora $\delta_n(A)=\delta_m(A')$.
+        \item La mappa $\delta_k$ è surgettiva per $k=[L:E]$.
+    \end{itemize}
+\end{lemma}
+
+\begin{theorem}
+    Le mappe $\delta_n$ permettono di costruire l'isomorfismo di gruppi $$\mathcal A_L \cong H^2(\Gamma,L^\ast)$$
+\end{theorem}
+
+
+\begin{corollary}$ $
+    \begin{itemize}
+        \item Se $D$ è un corpo finito, allora è un campo.
+        \item Il gruppo di Brauer di $\R$ è $\Z/(2)$, ovvero $\{ \R,\Hbb \}$
+    \end{itemize}
+\end{corollary}
+
+
+\subsection{Galois infinito}
+
+\begin{definition}
+    In generale, sia $G$ un gruppo,  $H\normal G$ e $M$ un $G$-modulo. La mappa naturale $Inf^q:H^q\left(\faktor G H, M^H\right)\rightarrow H^q(G,M)$ è detta \emph{inflazione}.
+\end{definition}
+
+Consideriamo ora $E\subset F$ di Galois con gruppo $\Gamma$; per ogni $E\subset L$ finita di Galois indichiamo $\Sigma_L=\Gal{F}{L}$, $\Gamma_L=\Gal{L}{E}=\faktor{\Gamma}{\Sigma_L}$.
+
+\begin{definition}
+    Un $\Gamma$-modulo $M$ è detto liscio se vale $M=\bigcup M^{\Sigma_L}$, dove l'unione è fatta sulle $L$ finite di Galois.
+\end{definition}
+
+\begin{definition}
+    Possiamo definire $H^q_{cont}(\Gamma, M)=\varinjlim H^q(\Gamma_L,M^{\Sigma_L})$, dove il sistema diretto è dato dalle $L$ estensioni finite di Galois e le mappe sono le inflazioni.
+\end{definition}
+
+\begin{lemma}
+    Sia $0\to A_i\to B_i\to C_i\to 0$ una successione esatta per ogni indice $i$; allora vale $0\to \varinjlim A_i\to \varinjlim B_i\to \varinjlim C_i\to0$.
+\end{lemma}
+
+\begin{lemma}
+    Sia $M$ un $\Gamma$-modulo continuo, e $M=\bigcup M_\alpha$ con $\alpha$ insieme filtrante. Allora $\varinjlim H^q(\Gamma, M_\alpha)=H^q_{cont}(\Gamma, M)$.
+\end{lemma}
+
+\begin{theorem}
+    Sia $0\to A\to B\to C\to0$ una successione esatta di moduli lisci. Allora ho la successione esatta lunga in coomologia con gli $H^q_{cont}$.
+\end{theorem}
+
+\begin{theorem}
+    Sia $E$ un campo, $F$ la sua chiusura separabile e $\Gamma=\Gal{F}{E}$. Allora il gruppo di Brauer di $E$ è $\mathcal A=\mathcal A_F\cong H^2(\Gamma, F^\ast)$.    
+\end{theorem}
 
 \section{Costruzione dei funtori derivati}
+
+\subsection{Risoluzione iniettiva}
+
+\begin{definition}
+    Un oggetto $I$ è detto iniettivo se $$\begin{tikzcd}
+    0 \ar[r] & X \ar[d] \ar[r] & Y \ar[dl, dashed] \\
+    & I
+    \end{tikzcd}$$
+\end{definition}
+\begin{oss}
+    Prodotto di iniettivi è iniettivo.
+\end{oss}
+
+\begin{definition}
+    Un $A$-modulo $I$ è \emph{divisibile} se $\forall x\in I,a\in A\setminus 0$ esiste un $y\in I$ tale che $ay=x$. 
+\end{definition}
+
+\begin{theorem}
+    Se $A$ è un PID e $I$ è un $A$-modulo, allora $I$ è iniettivo se e solo se è divisibile
+\end{theorem}
+\begin{corollary}
+    $\Q$ e $\Q/\Z$ sono degli $\Z$-moduli iniettivi.
+\end{corollary}
+
+\begin{proposition}
+    Sia $M$ uno $\Z$-modulo. Allora esiste un modulo iniettivo $I$ e un'immersione $\varphi:M\to I$.
+\end{proposition}
+
+\begin{lemma}
+    Sia $M$ un $A$-modulo e $N$ uno $\Z$-modulo. Allora vale $\Hom_\Z(M,N)\cong\Hom_A(M,N_A)$, dove $N_A=\Hom_\Z(A,N)$ che è un $A$-modulo con l'azione $(a\cdot\varphi)(x)=\varphi(xa)$.
+    
+    In particolare il funtore $N_A$ manda iniettivi in iniettivi.
+\end{lemma}
+
+\begin{theorem}
+    Sia $M$ un $A$-modulo. Allora esiste un $A$-modulo iniettivo $I$ tale che $0\to M\to I$. Ovvero $Mod_A$ ha abbastanza iniettivi.
+\end{theorem}
+
+\begin{corollary}
+    Ogni $A$-modulo ammette una risoluzione iniettiva, costruita nel seguente modo
+    $$\begin{tikzcd}
+    & & & & & \faktor{I^1}{I^0} \ar[dr] & \\
+    0 \ar[r] & M \ar[r] & I^0 \ar[dr] \ar[rr]  & & I^1 \ar[ur] \ar[rr] & & I^2\\
+    & & & \faktor{I^0}{M} \ar[ur] & & &
+    \end{tikzcd}$$
+\end{corollary}
+
+
+\begin{theorem}
+    Sia $\mathcal C$ la categoria degli $A$-moduli. Sia $\mathcal F\subset \mathcal C$ una classe di moduli tali che $\forall M\in\mathcal C\;\exists I\in\mathcal F$ tale che $0\to M\to I$.
+    
+    Allora dato un $M^\bullet\in \Com^+(\mathcal C)$ esiste $X^\bullet\in\Com^+(\mathcal F)$ con una mappa $\varphi:M^\bullet\to X^\bullet$ che è un quasi isomorfismo e iniettiva in ogni grado.
+\end{theorem}
+
+
+\subsection{Categorie triangolate}
+
+\begin{definition}
+    Sia $\mathcal C$ una categoria additiva con un funtore invertibile $[1]$, e una famiglia di triangoli distinti $X\to Y\to Z\to X[1]$. $\mathcal C$ si dice \emph{pretriangolata} se valgono
+    
+    \begin{itemize}
+        \item[TR1]\begin{enumerate}[a)]
+            \item $\forall X\in\mathcal C$ il triangolo $X=X\to0\to X[1]$ è distinto.
+            \item $\forall \varphi:X\to Y$ esiste un triangolo distinto $X\to Y\to Z\to X[1]$.
+            \item Un triangolo isomorfo ad un distinto è ancora distinto.
+        \end{enumerate}
+        \item[TR2] Il triangolo $X\to Y\to Z\to X[1]$ è distinto se e solo se $Y\to Z\to X[1]\to Y[1]$ è distinto.
+        \item[TR3] $$\begin{tikzcd}
+        X \ar[r] \ar[d] & Y \ar[r] \ar[d] & Z \ar[r] \ar[d, dashed] & X[1] \ar[d]\\
+        X' \ar[r] & Y' \ar[r] & Z' \ar[r] & X'[1]\\
+        \end{tikzcd}$$ 
+    \end{itemize}
+\end{definition}
+
+\begin{theorem}
+    Se $\mathcal C$ è abeliana, la categoria $\Kom^+(\mathcal C)$, con funtore $(X[1])^n=X^{n+1}$ e $\de_{X[1]}^n=-\de_X^{n+1}$, e triangoli distinti della forma $X\xrightarrow{\varphi} Y\to C(\varphi)\to X[1]$ dati da $C(\varphi)^n=Y^{n}\oplus X^{n+1}$ e $\de_{C(\varphi)}^n=\begin{pmatrix}
+    \de_Y & \varphi \\ 0 & -\de_X
+    \end{pmatrix}$ è pretriangolata.
+\end{theorem}
+
+\begin{proposition}
+    Sia $X\to Y\to Z\to X[1]$ un triangolo distinto in una categoria pretriangolata. Allora $\forall U$ la successione $\Hom(U,X)\to \Hom(U,Y)\to \Hom(U,Z)\to \Hom(U,X[1])$ è esatta di gruppi abeliani.
+\end{proposition}
+
+\begin{proposition}
+    Sia $X^\bullet\to Y^\bullet\to Z^\bullet\to X^\bullet[1]$ un triangolo distinto nella categoria omotopica degli $A$-moduli. Allora per ogni $i$ la successione $H^i(X)\to H^i(Y)\to H^i(Z)\to H^{i+1}(X)$ è esatta.
+\end{proposition}
+
+\begin{proposition}
+    Sia $0\to X^\bullet\xrightarrow{\varphi} Y^\bullet\xrightarrow{\pi} Z^\bullet\to 0$ una successione esatta di complessi. Consideriamo la mappa $F:C(\varphi)\to Z$ data da $F(y,x)=\pi(y)$. Questa è un quasi isomorfismo, e inoltre fa commutare il diagramma
+    $$\begin{tikzcd}
+    H^i(X) \ar[r] \ar[d, equal] & H^i(Y) \ar[r] \ar[d, equal]& H^i(Z) \ar[r, "-\omega"] & H^{i+1}(X) \ar[d, equal]\\
+    H^i(X) \ar[r] & H^i(Y) \ar[r] & H^i(C(\varphi)) \ar[u, "H^i(F)"] \ar[r] & H^{i+1}(X)&
+    \end{tikzcd}$$
+\end{proposition}
+
+\subsection{Funtori derivati}
+\begin{lemma}
+    Sia $X^\bullet$ un complesso esatto, e $I^\bullet$ un complesso di oggetti iniettivi. Allora $\Hom_\Kom(X,I)=0$.
+\end{lemma}
+
+\begin{proposition}
+    Siano $A,B$ complessi e $I$ complesso iniettivo.
+    \begin{enumerate}
+        \item Se $\varphi:A\to B$ è un quasi isomorfismo, allora $\Hom_\Kom(B,I)\to\Hom_\Kom(A,I)$ è un isomorfismo.
+        \item La risoluzione iniettiva di un complesso è unica in $\Kom$ a meno di unico isomorfismo.
+        \item Dette $A\to I_A$ e $B\to I_B$ le risoluzioni iniettive, c'è una mappa iniettiva $\Hom_\Kom(A,B)\hookrightarrow \Hom_\Kom(I_a,I_B)$. 
+    \end{enumerate}
+\end{proposition}
+
+
+\begin{definition}
+    Sia $F:\mathcal A\to \mathcal B$ un funtore additivo di categorie abeliane; supponiamo che $\mathcal A$ abbia abbastanza iniettivi.
+    
+    Per ogni $X\in\Com^+(\mathcal A)$ esiste una (unica in $\Kom$) risoluzione iniettiva $I_X$.
+    
+    Definiamo allora $RF:\Kom^+(\mathcal A)\to\Kom^+(\mathcal B)$ tramite $RF(X)=F(I_X)$.
+    
+    Sia poi $R^iF:\Kom^+(\mathcal A)\to\mathcal B$ dato da $R^iF(X)=H^i(RF(X))$.
+\end{definition}
+
+\begin{oss}
+    Se $F$ è esatto a sinistra, allora $R^0F(X)=F(X)$.
+\end{oss}
+
+\begin{proposition}
+    Il funtore $RF$ manda triangoli distinti in triangoli distinti.
+\end{proposition}
+
+
+\begin{definition}
+    Sia $\mathcal A$ categoria abeliana, $X\in\mathcal A$. Definiamo $F_X(Y)=\Hom(X,Y)$ e $\underline{F_X}(Y)=\Hom(Y,X)$.
+    
+    Definiamo allora
+    \begin{itemize}
+        \item $\Ext^i(X,Y)=R^iF_X(Y)$ per $Y\in\Com^+(\mathcal A)$.
+        \item $\underline{\Ext^i}(X,Y)=R^i\underline{F_Y}(X)$ per $X\in\Com^+(\mathcal A)$ (devo usare una risoluzione proiettiva, perché è controvariante).
+    \end{itemize}
+\end{definition}
+
+
+\begin{definition}
+    Un complesso doppio è un insieme di oggetti $X^{i,j}$ e mappe $\de_O^{i,j}$ e $\de_V^{i,j}$ messi così:
+    $$\begin{tikzcd}
+    & \, & \, &  \\
+    \ar[r] &  X^{i,j+1} \ar[u] \ar[r] & X^{i+1,j+1} \ar[r] \ar[u] &  \, \\
+    \ar[r] &  X^{i,j} \ar[u, "\de_V^{i,j}"] \ar[r, "\de_O^{i,j}"] & X^{i+1,j} \ar[r] \ar[u] &  \,  \\
+    & \ar[u] & \ar[u] & 
+    \end{tikzcd}$$
+    
+    Sia poi $T^n=\bigoplus_{i+j=n}X^{i,j}$ il complesso totale, con bordi $\rest{\de_T^n}{X^{i,j}}=\de_O^{i,j}+(-1)^i\de_V^{i,j}$.
+\end{definition}
+
+\begin{proposition}
+    Sia $X^{i,j}$ un complesso doppio con $X^{i,j}=0$ per $i<0$ o $j<0$. Supponiamo inoltre che le rige e le colonne siano esatte, tranne al più in $0$; definiamo $A^j=\ker\de_O^{0,j}$ e $B^i=\ker\de_V^{i,0}$.
+    Siano poi $\alpha:A^\bullet\to T$ e $\beta:B^\bullet\to T$ le inclusioni.
+    
+    Allora $\alpha,\beta$ sono mappe di complessi e quasi isomorfismi.
+\end{proposition}
+
+\begin{proposition}
+    Siano $X,Y$ oggetti. Allora $\Ext^i(X,Y)=\underline{\Ext^i}(X,Y)$
+\end{proposition}
+
+
+

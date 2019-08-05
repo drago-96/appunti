@@ -1,5 +1,9 @@
 \chapter{Algebra commutativa}
 
+\begin{lemma}
+    Sia $\varphi:A\to B$ di anelli, e $\pf\subset A$ ideale primo. Allora esiste $\qf\subset B$ primo con $\pf=\qf^c$ se e solo se $\pf=\pf^{ce}$.
+\end{lemma}
+
 \section{Estensioni intere}
 \begin{definition}
  Dati $A\subset B$ anelli, $b\in B$ si dice \emph{intero su $A$} se esiste un polinomio monico $f\in A[t]$ tale che $f(b)=0$.\\
@@ -56,11 +60,13 @@
 \end{proposition}
 
 \begin{theorem}
-    Sia $A$ dominio normale, $K$ il campo dei quozienti; sia $K\subset L$ un'estensione algebrica. Dato un $x\in L$ vale $x\in \overline{A}^L \iff \mu_x(t)\in A[t]$.
+    Sia $A$ dominio normale, $K$ il campo dei quozienti; sia $K\subset L$ un'estensione algebrica; sia $I\subset A$ un ideale. Dato un $x\in L$ vale $x\in \overline{I}^L \iff \mu_x(t)\in \sqrt{I}[t]$.
+    
+    In particolare $x\in \overline{A}^L \iff \mu_x(t)\in A[t]$.
 \end{theorem}
 
 \begin{example}
-    Se $A=\Z, K=\Q, L=\Q[\sqrt d]$, allora $\overline{A}^L=\begin{cases}
+5    Se $A=\Z, K=\Q, L=\Q[\sqrt d]$, allora $\overline{A}^L=\begin{cases}
     \Z[\sqrt d] & d\equiv 2,3\pmod 4 \\
     \Z\left[ \frac{1+\sqrt d}{2} \right] & d\equiv 1\pmod 4
     \end{cases}$
