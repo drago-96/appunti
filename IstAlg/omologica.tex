@@ -81,7 +81,32 @@ Sia ora $G$ un gruppo che agisce sullo spazio $X$; sia $\Gamma$ un gruppo che ag
 
 
 
-\section{Categorie abeliane e complessi}
+\section{Categorie, categorie abeliane e complessi}
+
+\begin{lemma}[di Yoneda]
+	Sia $ \mathcal{C} $ una categoria piccola e $ F \colon \mathcal C \to \mathbf{Set} $ un funtore controvariante nella categoria degli insiemi. Si ha una bigezione
+	\[ \text{Nat}(h_X, \, F) \leftrightarrow F(X). \] 
+\end{lemma}
+
+\begin{proposition}[che fa impallidire anche Yoneda]
+	I limiti sono coequalizzatori. Sia $ I $ un sistema proiettivo, allora $ \varprojlim F(i) $ è isomorfo all'equalizzatore del diagramma
+	\[ \begin{tikzcd}
+	\prod_{i} F(i)  \rar[shift left = 0.5ex, "T"] \rar[shift right = 0.5ex, "S" below] & \displaystyle\prod_{\varphi\colon i \to j} F(j)_\varphi
+	\end{tikzcd} \]
+	dove otteniamo $ T $ ed $ S $ sfruttando la proprietà universale el prodotto per completare i diagrammi
+	\[ \begin{tikzcd}
+	\prod_{i} F(i) \rar["T", dashed] \dar["\pi_b"] &
+	\displaystyle\prod_{\varphi\colon i \to j} F(j)_\varphi \dar["\pi_{b\varphi}"] \\
+	F(b) \rar["\id"] &
+	F(b)_\varphi,
+	\end{tikzcd} \qquad\qquad
+	\begin{tikzcd}
+	\prod_{i} F(i) \rar["S", dashed] \dar["\pi_a"] &
+	\displaystyle\prod_{\varphi\colon i \to j} F(j)_\varphi \dar["\pi_{b\varphi}"] \\
+	F(a) \rar["\varphi"] &
+	F(b)_\varphi.
+	\end{tikzcd}\]
+\end{proposition}
 
 \begin{definition}
     Una categoria $\mathcal{C}$ si dice \emph{additiva} se soddisfa le seguenti proprietà:
@@ -105,15 +130,15 @@ Sia ora $G$ un gruppo che agisce sullo spazio $X$; sia $\Gamma$ un gruppo che ag
     Fissata una mappa $\varphi: X\to Y$, diciamo che:
     \begin{itemize}
         \item $\ell:Z\to X$ è il \emph{nucleo} di $\varphi$ se $\varphi\circ\ell=0$ e per ogni $\alpha: U\to X$ tale che $\varphi\circ \alpha=0$, esiste un'unica $\tilde\alpha:U\to Z$ che faccia commutare\\
-        $\begin{tikzcd}
+        $$ \begin{tikzcd}
         Z \ar[r, "\ell"] & X \ar[r, "\varphi"] & Y \\
          & U \ar[u,"\alpha"] \ar[ul, dashrightarrow, "\tilde\alpha"]
-        \end{tikzcd}$
+        \end{tikzcd} $$
         \item $m:Y\to Q$ è il \emph{conucleo} di $\varphi$ se $m\circ\varphi=0$ e per ogni $\beta: Y\to U$ tale che $\beta\circ\varphi=0$, esiste un'unica $\tilde\beta:Q\to U$ che faccia commutare\\
-        $\begin{tikzcd}
+        $$ \begin{tikzcd}
         X \ar[r, "\varphi"] & Y \ar[r, "m"] \ar[d,"\beta"] & Q \ar[dl, dashrightarrow, "\tilde\beta"] \\
         & U 
-        \end{tikzcd}$
+        \end{tikzcd} $$
     \end{itemize}
 \end{definition}
 
@@ -136,6 +161,10 @@ Sia ora $G$ un gruppo che agisce sullo spazio $X$; sia $\Gamma$ un gruppo che ag
 \begin{proposition}
     In una categoria abeliana valgono lo snake lemma e il lemma dei 5.
 \end{proposition}
+
+\begin{lemma}
+	Nella categoria degli $ A $-moduli il limite inverso $ \varprojlim $ è esatto a sinistra.
+\end{lemma}
 
 \begin{theorem}
     In realtà le categorie abeliane sono gli $A$-moduli...
