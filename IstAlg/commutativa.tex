@@ -4,6 +4,10 @@
     Sia $\varphi:A\to B$ di anelli, e $\pf\subset A$ ideale primo. Allora esiste $\qf\subset B$ primo con $\pf=\qf^c$ se e solo se $\pf=\pf^{ce}$.
 \end{lemma}
 
+\begin{lemma} 
+	Sia $ A $ un \pid: un modulo $ M $ è piatto se e solo è libero da torsione.
+\end{lemma}
+
 \section{Estensioni intere}
 \begin{definition}
  Dati $A\subset B$ anelli, $b\in B$ si dice \emph{intero su $A$} se esiste un polinomio monico $f\in A[t]$ tale che $f(b)=0$.\\
@@ -11,12 +15,12 @@
  Se $f:A\to B$ è morfismo di anelli con $1$, $I\subset A$, diciamo che $b$ è intero su $I$ se lo è su $I^e$.
 \end{definition}
 
-\begin{proposition}
+\begin{proposition}[Funzionamento Tecnico degli Interi]
     Siano $A\subset B$, $b\in B$. Sono equivalenti:
-    \begin{enumerate}
+    \begin{enumerate}[i.]
         \item $b$ è intero su $A$.
         \item $A[b]$ è finitamente generato come $A$-modulo.
-        \item $\exists C$ anello tale che $A[b]\subset C \subset B$ e $C$ è fin. gen. come $A$-modulo.
+        \item $\exists C$ anello tale che $A[b]\subset C $ e $C$ è fin. gen. come $A$-modulo.
         \item $\exists M$ un $A[b]$-modulo fedele, fin. gen. come $A$-modulo.
     \end{enumerate}
 \end{proposition}
@@ -34,7 +38,7 @@
     \begin{itemize}
         \item Se $b_1,\dots, b_n\in B$ sono interi su $A$, allora $A[b_1,\dots,b_n]$ è fin. gen. come $A$-modulo.
         \item $\overline{A}^B$ è un sottoanello di $B$.
-        \item Un'este  nsione finita è anche intera.
+        \item Un'estensione finita è anche intera.
         \item Se $A\subset B\subset C$ con $A\subset B, B\subset C$ finite, allora anche $A\subset C$ è finita.
         \item Se $A\subset B\subset C$ con $A\subset B, B\subset C$ intere, allora anche $A\subset C$ è intera.
     \end{itemize}
@@ -44,48 +48,46 @@
     Sia $A\subset B$ intera, $I\subset A$ ideale. Detto $\overline{I}^B=\{ b\in B \st b \text{ è intero su } I \}$, vale $\overline{I}^B = \sqrt{I^e}$.
 \end{lemma}
 
-\begin{proposition}$ $
+\begin{proposition} Sia $A\subset B$ intera, $ J $ ideale di $ B $, $ S $ parte moltiplicativa di $ A $. Abbiamo che:
     \begin{itemize}
-        \item Sia $A\subset B$ intera e $J\subset B$; allora $\faktor{A}{J^c}\subset \faktor{B}{J}$ è intera.
-        \item Vale $\overline{S^{-1}A}^{S^{-1}B}=S^{-1}(\overline{A}^B) $
+        \item $\faktor{A}{J^c}\subset \faktor{B}{J}$ è intera;
+        \item $\overline{S^{-1}A}^{S^{-1}B}=S^{-1}(\overline{A}^B) $.
     \end{itemize}
 \end{proposition}
 
-\begin{definition}
-    Se $A$ è un dominio, sia $K$ il campo dei quozienti. Si dice che $A$ è \emph{normale} se $\overline{A}^K=A$.
+\begin{definition}[Normale]
+    Se $A$ è un dominio. Si dice che $A$ è \emph{normale} se è integralmente chiuso del suo campo dei quozienti: $\overline{A}^K=A$, dove $ K $ sarà il campo dei quozienti.
 \end{definition}
 
 \begin{proposition}
-    Ogni UFD è normale.
+    Ogni \ufd è normale.
 \end{proposition}
 
-\begin{theorem}
-    Sia $A$ dominio normale, $K$ il campo dei quozienti; sia $K\subset L$ un'estensione algebrica; sia $I\subset A$ un ideale. Dato un $x\in L$ vale $x\in \overline{I}^L \iff \mu_x(t)\in \sqrt{I}[t]$.
-    
-    In particolare $x\in \overline{A}^L \iff \mu_x(t)\in A[t]$.
+\begin{theorem}[Comodità dei Normali]
+    Sia $A$ dominio normale, $K$ il campo dei quozienti; sia $K\subset L$ un'estensione algebrica; sia $I\subset A$ un ideale. Dato un $x\in L$ vale $x\in \overline{I}^L \iff \mu_x(t)\in \sqrt{I}[t]$. In particolare $$ x\in \overline{A}^L \iff \mu_x(t)\in A[t]. $$
 \end{theorem}
 
 \begin{example}
-5    Se $A=\Z, K=\Q, L=\Q[\sqrt d]$, allora $\overline{A}^L=\begin{cases}
+    Se $A=\Z, K=\Q, L=\Q[\sqrt d]$, allora $\overline{A}^L=\begin{cases}
     \Z[\sqrt d] & d\equiv 2,3\pmod 4 \\
     \Z\left[ \frac{1+\sqrt d}{2} \right] & d\equiv 1\pmod 4
     \end{cases}$
 \end{example}
 
 \begin{lemma}
-    Sia $A\subset B$ intera, con $A,B$ domini. Allora $A$ è un campo se e solo se $B$ è un campo.
+    Sia $A\subset B$ intera di domini. Allora $A$ è un campo se e solo se $B$ è un campo.
 \end{lemma}
 
 \begin{corollary}
     Sia $A\subset B$ intera, $\pf\subset B$ primo. Allora $\pf$ è massimale se e solo se $\pf^c$ è massimale.
 \end{corollary}
 
-\begin{lemma}
+\begin{corollary}
     Sia $A\subset B$ intera, $\pf\subset \qf\subset B$ ideali primi. Se $\pf^c=\qf^c$ allora $\pf=\qf$.
-\end{lemma}
+\end{corollary}
 
-\begin{theorem}[lying over]
-    Sia $A\subset B$ intera. Allora $\varphi:\Spec B\to\Spec A$ è surgettiva, ovvero per ogni $\pf\subset A$ esiste $\qf\subset B$ tale che $\qf^c=\qf\cap A=\pf$.
+\begin{theorem}[Lying over]
+    Sia $A\subset B$ intera. Allora $\varphi:\Spec B\to\Spec A$ è surgettiva.
 \end{theorem}
 
 \begin{definition} Sia $A\subset B$, e $\pf_1\subset \pf_2\subset A$ ideali primi.
@@ -95,7 +97,7 @@
     \end{itemize}
 \end{definition}
 
-\begin{theorem} Sia $A\subset B$.
+\begin{theorem}[Going Down] Sia $A\subset B$.
     \begin{itemize}
         \item Se l'estensione è intera, allora $\varphi: \Spec B\to\Spec A$ è chiusa.
         \item Se $\varphi: \Spec B\to\Spec A$ è chiusa, allora vale il going up.
@@ -106,15 +108,15 @@
     Sia $A\subset B$; se vale il going up e $B$ è noetheriano, allora $\varphi:\Spec B\to\Spec A$ è chiusa.
 \end{proposition}
 
-\begin{lemma}
-    Sia $f:A\to B$, e $\varphi:Y=\Spec B\to \Spec A=X$; dato $\qf\in Y$, definiamo $Y_\qf=\{ r\in Y \st r\subset \qf \}$. Allora
+\begin{lemma}[degli Aperti]
+    Sia $f:A\to B$, e $\varphi:Y=\Spec B\to \Spec A=X$; dato $\qf\in Y$, definiamo $Y_\qf = \Spec B_\qf =\{ r\in Y \st r\subset \qf \}$. Allora
     \begin{enumerate}
         \item $Y_\qf=\bigcap_{\alpha\not\in \qf} Y_\alpha$
         \item $\varphi(Y_\qf)=\bigcap_{\alpha\not\in \qf} \varphi(Y_\alpha)$
     \end{enumerate}
 \end{lemma}
 
-\begin{theorem}
+\begin{theorem}[Going Down]
     Sia $f:A\to B$ e $\varphi:\Spec B\to\Spec A$. Se $\varphi$ è aperta, allora vale il going down per $f$.
 \end{theorem}
 
@@ -190,11 +192,30 @@ Cosa succede in dimensione bassa?
     Sia $A$ un anello. Allora $A$ è artiniano se e solo se è noetheriano e $\dim A=0$.
 \end{theorem}
 
+\begin{definition}[Lunghezza]
+	La lunghezza di modulo $ M $ è limite superiore sulle lunghezze delle catene di sottomoduli:
+	\[ l(M) \colon \{ n \mid \exists  M_0 \subsetneq M_1 \subsetneq \dots \subsetneq M_n \} \]
+\end{definition}
 
+\begin{proposition}
+	Se esiste una catena di sottomoduli massimale di lunghezza finita, allora sono tutte finite e della stessa lunghezza.
+\end{proposition}
+
+\begin{proposition}
+	La lunghezza $ l(M) $ è finita se e solo se $ M $ è artiniano e noetheriano.
+\end{proposition}
+
+\begin{theorem}
+	Se $ A \subseteq B $ è finita, si trovano solo finiti primi di $ Q $ sopra ogni $ \pf \in \Spec A. $
+\end{theorem}
 
 \section{Azione di Galois}
-Sia $A$ un dominio normale, $K=\Q(A)$ e $L\supset K$ un'estensione di Galois con gruppo $G$; sia $B=\overline{A}^L$.\\
-Definiamo $Y=\Spec B, X=\Spec A, \varphi:Y\to X$; sia poi $Y_\pf=\varphi^{-1}(\pf)$, cioè i primi di $B$ che stanno sopra $A$.
+Sia $A$ un dominio normale, $K=\Q(A)$ e $L\supset K$ un'estensione di Galois con gruppo $G$; sia $B=\overline{A}^L$:
+\[ \begin{tikzcd}
+B \rar[dash]\dar[dash] & L \dar[dash] \\
+A \rar[dash] & K.
+\end{tikzcd} \]
+Definiamo $Y=\Spec B,\, X=\Spec A,\, \varphi\colon Y\to X$; sia poi $Y_\pf=\varphi^{-1}(\pf)$, cioè i primi di $B$ che stanno sopra $A$ (che non è lo stesso $ Y_\pf $ di sopra!).
 
 \begin{oss}
     Se $b\in B$, allora $\sigma(b)\in B$ per ogni $\sigma\in G$.\\
@@ -202,19 +223,38 @@ Definiamo $Y=\Spec B, X=\Spec A, \varphi:Y\to X$; sia poi $Y_\pf=\varphi^{-1}(\p
 \end{oss}
 
 \begin{theorem}
+	Il campo fissato dal gruppo di decomposizione $ L^{G_\qf} $ è la più piccola estensione di $ K $ sopra cui $ \qf L^{G_\qf} $ troviamo un unico primo.
+\end{theorem}
+
+\begin{theorem}
     Il gruppo $G$ agisce transitivamente sull'insieme $Y_\pf$.
 \end{theorem}
 
 \begin{definition}
-    Fissato un primo $\qf\in Y$, definiamo il \emph{gruppo di decomposizione} $G_\qf=\{ \sigma\in G \st \sigma(\qf)=\qf \}$.\\
-    Se $\pf=\qf^c$, detto $S=A\setminus\pf$, otteniamo un'estensione di campi $k(\pf)=\faktor{S^{-1}A}{S^{-1}\pf} \subset \faktor{S^{-1}B}{S^{-1}\qf} =k(\qf)$
+    Fissato un primo $\qf\in Y$, definiamo il \emph{gruppo di decomposizione} $G_\qf=\{ \sigma\in G \st \sigma(\qf)=\qf \}$.
+\end{definition}
+
+\begin{definition}
+	Se $\pf=\qf^c$, detto $S=A\setminus\pf$, otteniamo un'estensione di campi $$ k(\pf)=\faktor{S^{-1}A}{S^{-1}\pf} \subset \faktor{S^{-1}B}{S^{-1}\qf} =k(\qf) $$
 \end{definition}
 
 \begin{proposition}
-    $G_\qf$ agisce dunque su $k(\qf)$ tenendo fisso $k(\pf)$, e la mappa $G_\qf\to\{ \varphi:k(\qf)\to k(\qf) \st \rest{\varphi}{k(\pf)}=\id \}$ è surgettiva
+    $G_\qf$ agisce dunque su $k(\qf)$ tenendo fisso $k(\pf)$, e la mappa $$ G_\qf\to\{ \varphi:k(\qf)\to k(\qf) \st \rest{\varphi}{k(\pf)}=\id \} = \Gal{k(q)}{k(p)} $$ è surgettiva.
 \end{proposition}
 
-Lezione 18/10
+\begin{theorem}
+	Sia $ A $ è un dominio normale dimensione $ \dim A = 1 $. Chiamiamo $ e $ l'indice di ramificazione (il numero per cui $ \pf B_\qf = \qf^e B_\qf $), $ f $ l'indice d'inerzia (il grado dell'estensione $ [\kappa(\qf):\kappa(\pf) ]$) e $ r $ la cardinalità di $ Y_\qf $. Si ha che
+	\[ [L\,\colon K] = mef. \]
+\end{theorem}
+
+\begin{theorem}[Finitezza dell'estensione intera]
+	Nel classico setup
+	\[ \begin{tikzcd}
+	B \rar[dash]\dar[dash] & L \dar[dash] \\
+	A \rar[dash] & K,
+	\end{tikzcd} \]
+	supporre $ K/L $ separabile e finita e $ A $ normale e noetheriano è sufficiente per concludere che l'estensione degli anelli degli interi $ A \subseteq B $ è a sua volta finita.
+\end{theorem}
 
 \section{Valutazioni e completamenti}
 
@@ -224,8 +264,7 @@ Lezione 18/10
         \item $v(xy)=v(x)+v(y)$
         \item $v(x+y)\ge\min(v(x),v(y))$
     \end{itemize}
-    Data una valutazione si definisce $A=\{x\in k \st v(x)\ge0 \}$ e $\m=\{ x\in k\st v(x)>0 \}$ un ideale di $A$.\\
-    $v$ si dice \emph{discreta} se $\Imm v=\Z\cdot q$ per qualche $q\neq0$; in questo caso $A$ è un DVR.
+    Data una valutazione si definisce $A=\{x\in k \st v(x)\ge0 \}$ e $\m=\{ x\in k\st v(x)>0 \}$ un ideale di $A$. La valutazione $v$ si dice \emph{discreta} se $\Imm v=\Z\cdot q$ per qualche $q\neq0$; in questo caso $A$ è un DVR.
 \end{definition}
 
 \begin{proposition}
@@ -238,7 +277,7 @@ Lezione 18/10
 
 \begin{theorem}
     Sia $A$ un anello locale noetheriano, con $\dim A=1$. Allora sono equivalenti:
-    \begin{enumerate}
+    \begin{enumerate}[i.]
         \item $A$ è un DVR
         \item $A$ è un dominio normale
         \item l'ideale massimale è principale
