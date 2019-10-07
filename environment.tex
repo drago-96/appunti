@@ -17,13 +17,8 @@
 \usepackage{multirow}
 \usepackage{breqn}
 \usepackage{tikz-cd}
-\usepackage{enumerate}  % http://ctan.org/pkg/enumerate
 %\setcounter{secnumdepth}{5}
 \setlength\extrarowheight{3pt}
-
-%\setlrmarginsandblock{2.5cm}{2.5cm}{*}
-%\setulmarginsandblock{2.5cm}{*}{1}
-%\checkandfixthelayout 
 
 \usepackage{hyperref}
 
@@ -36,7 +31,8 @@
 }
 
 
-\newtheorem{theorem}{Teorema}
+
+\newtheorem{theorem}{Teorema}[section]
 \newtheorem*{theorem*}{Teorema}
 \newtheorem{acknowledgement}[theorem]{Acknowledgement}
 \newtheorem{congettura}[theorem]{Congettura}
@@ -56,10 +52,10 @@
 \newtheorem{summary}[theorem]{Riassunto}
 
 \theoremstyle{definition}
-\newtheorem*{definition}{Definizione}
-\newtheorem*{example}{Esempio}
-\newtheorem*{exercise}{Esercizio}
-\newtheorem*{solution}{Soluzione}
+\newtheorem{definition}[theorem]{Definizione}
+\newtheorem{example}[theorem]{Esempio}
+\newtheorem{exercise}{Esercizio}[section]
+\newtheorem{solution}[exercise]{Soluzione}
 \newtheorem*{notazione}{Notazione}
 
 
@@ -73,16 +69,6 @@
 \addtolength{\textheight}{0.5in}
 
 
-
-
-
-\newenvironment{mysol}{%
-    \begin{sol}$ $\nobreak\ignorespaces
-    }{%
-        \qedhere
-    \end{sol}
-}
-
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\ann}{Ann}
 \DeclareMathOperator{\lt}{lt}
@@ -92,6 +78,7 @@
 \DeclareMathOperator{\Ris}{Ris}
 \DeclareMathOperator{\Imm}{Im}
 \DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\rk}{rk}
 \DeclareMathOperator{\car}{char}
 \DeclareMathOperator{\p}{\mathcal P}
 \DeclareMathOperator{\st}{\; |\;}
@@ -153,6 +140,5 @@
 
 \newcommand{\Gal}[2]{\operatorname{Gal}\left(\faktor{#1}{#2}\right)}
 
-% Gallo's
 \newcommand{\pid}{\textsc{pid}}
 \newcommand{\ufd}{\textsc{ufd}}
